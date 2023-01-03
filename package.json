@@ -1,0 +1,14 @@
+{
+  "name": "simple-validator",
+  "version": "0.1.0",
+  "description": "Simple and easy-to-use javascript object validator.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "typescript": "^4.9.4"
+  }
+}
