@@ -8,9 +8,6 @@ export type ValidatorRule = {
 }
 export type ValidatorRuleList = Array<ValidatorRule>
 
-const LENGTH_KEYS = ['len', 'min', 'max'] as const
-type LengthKeyType = typeof LENGTH_KEYS[number]
-
 export type ValidatorRules<T> = { [Property in keyof T]?: ValidatorRuleList }
 
 export class Validator <T> {
@@ -27,7 +24,7 @@ export class Validator <T> {
 
     validate(){
         this.clearAllErrors()
-        
+
         const data = this.data
         const rules = this.rules
 
