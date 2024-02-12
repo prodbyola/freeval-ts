@@ -1,4 +1,4 @@
-import { ValidatorRule } from "..";
+import { ValidatorRule } from "../common";
 import { validateByLength } from "./length";
 
 const validateRule = <T>(rule: ValidatorRule, key: keyof T, value: string): [boolean, string] => {

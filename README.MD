@@ -12,18 +12,19 @@ npm install freeval
 
 ## Usage
 
-Here's how you can use the Validator package in your TypeScript projects:
+Here's how you can use the `freeval` in your TypeScript projects:
 
 ```typescript
 import { Validator, ValidatorRules } from 'freeval';
 
-// Define your data object and validation rules
+// Not necessary but you can define an interface for your data
 interface UserData {
     username: string;
     email: string;
     password: string;
 }
 
+// Define your data object and validation rules
 const data: UserData = {
     username: 'JohnDoe',
     email: 'john@example.com',
@@ -49,7 +50,7 @@ const rules: ValidatorRules<UserData> = {
 const validator = new Validator(data, rules);
 
 // Validate the data
-const isValid = validator.validate();
+const isValid = validator.valid;
 
 if (!isValid) {
     console.log('Validation failed. Errors:');
@@ -74,9 +75,12 @@ The `Validator<T>` class provides methods for data validation.
 
 Sets the validation rules for the object properties.
 
-#### `validate(): boolean`
+#### `valid: boolean`
 
 Validates the object against the specified rules. Returns `true` if the object passes validation; otherwise, returns `false`.
+
+#### `invalid: boolean`
+Returns a negated value of `valid`.
 
 #### `getErrors(key: keyof T): string[] | undefined`
 
