@@ -7,7 +7,8 @@ export class Validator<T> {
     private _errors: Map<keyof T, string[]> = new Map
 
     get valid() {
-        return this.validate()
+        const v = this.validate()
+        return v
     }
 
     get inValid() {
@@ -63,7 +64,7 @@ export class Validator<T> {
         this._errors = new Map()
     }
 
-    private validate() {
+    validate() {
         this.clearAllErrors()
 
         const data = this.data
