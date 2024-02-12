@@ -1,13 +1,13 @@
-# Validator-JS
+# Freeval
 
-The Validator-JS provides a flexible validation mechanism for objects based on predefined rules.
+Freeval (for free validator) provides a flexible validation mechanism for objects based on predefined rules.
 
 ## Installation
 
 To install the Validator package, you can use npm:
 
 ```bash
-npm install /validator-js
+npm install freeval
 ```
 
 ## Usage
@@ -15,7 +15,7 @@ npm install /validator-js
 Here's how you can use the Validator package in your TypeScript projects:
 
 ```typescript
-import { Validator, ValidatorRules } from '@your-username/validator-package';
+import { Validator, ValidatorRules } from 'freeval';
 
 // Define your data object and validation rules
 interface UserData {

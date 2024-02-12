@@ -1,14 +1,16 @@
 {
-  "name": "validate-js",
-  "version": "0.1.0",
-  "description": "Simple and easy-to-use javascript object validator.",
-  "main": "index.js",
+  "name": "freeval",
+  "version": "1.2.0",
+  "description": "Freeval (for free validator) provides a flexible validation mechanism for objects based on predefined rules.",
+  "categories": ["Keymaps", "Programming Languages"],
+  "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc"
   },
-  "author": "",
+  "author": "Ajayi ",
   "license": "ISC",
-  "dependencies": {
-    "typescript": "^4.9.4"
+  "devDependencies": {
+    "typescript": "^5.3.3"
   }
 }
