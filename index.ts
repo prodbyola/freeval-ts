@@ -1,21 +1,34 @@
-type ValidatorRule = Array<{
-    rule: 'required' | 'email' | 'password' | boolean,
-    error?: string
-}>
+import { validateRule } from "./validators"
 
-export type ValidatorRules<T> = { [Property in keyof T]?: ValidatorRule }
+export type ValidatorKey = 'required' | 'email' | 'password' | 'number' | boolean | string
+
+export type ValidatorRule = {
+    rule: ValidatorKey,
+    error?: string
+}
+export type ValidatorRuleList = Array<ValidatorRule>
+
+const LENGTH_KEYS = ['len', 'min', 'max'] as const
+type LengthKeyType = typeof LENGTH_KEYS[number]
+
+export type ValidatorRules<T> = { [Property in keyof T]?: ValidatorRuleList }
 
 export class Validator <T> {
     private _errors: Map<keyof T, string[]> = new Map
+    
     get errors(){
         return this._errors as ReadonlyMap<keyof T, string[]>
     }
 
-    constructor ( private data: T, private rules? : ValidatorRules<T>){}
+    constructor ( private data: T, private rules?: ValidatorRules<T>){}
+    setRules(rules: ValidatorRules<T>){
+        this.rules = rules
+    }
 
     validate(){
+        this.clearAllErrors()
+        
         const data = this.data
-        let error = '', validated = true
         const rules = this.rules
 
         if(rules){
@@ -27,38 +40,21 @@ export class Validator <T> {
                     const value = data[k]
 
                     ruleList.forEach(rule => {
-                        let condition = rule.rule
-                        if(rule.error) error = rule.error
-
-                        if(condition === 'required') {
-                            const v = value as string
-                            
-                            condition = Boolean(v || v?.length) // value must not be empty
-                            if(!rule.error) error = `The ${(k as string)} field is <b>required</b>.` 
-
-                        } else if (condition === 'email') {
-                            const v = value as string
-                            condition = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(v) // value must be an email patterb
-                            if(!rule.error) error = 'The email field must be a <b>valid email</b>.'
-                        } else if (condition === 'password'){
-                            const v = value as string
-                            const strongRegex = new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})');
-                            condition = strongRegex.test(v)
-
-                            if(!rule.error) error = 'Password must contain at least <b>1 lowercase</b> alphabetical character, <b>1 uppercase</b> alphabetical character, <b>1 numeric</b> character, one <b>special character</b> and must be <b>eight characters</b> or longer.'
-                        }
-
-                        if(!condition) {
+                        const [isValid, error] = validateRule(rule, k, value as string)
+                        
+                        if(!isValid) {
                             this.setError(k, error)
-                            validated = false
+                            
                         }
                     })
 
                 }
             })
+        } else {
+            throw new Error('Validation rules not specified.')
         }
 
-        return validated
+        return !this._errors.size
     }
 
     private setError(field: keyof T, error: string){
@@ -75,4 +71,7 @@ export class Validator <T> {
         this._errors.set(key, [])
     }
 
+    clearAllErrors(){
+        this._errors = new Map()
+    }
 }

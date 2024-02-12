@@ -1,5 +1,5 @@
 {
-  "name": "simple-validator",
+  "name": "validate-js",
   "version": "0.1.0",
   "description": "Simple and easy-to-use javascript object validator.",
   "main": "index.js",
