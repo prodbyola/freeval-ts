@@ -8,14 +8,29 @@ export class Validator<T> {
 
     /**
      * Validates the object against the specified rules. Returns `true` if the object passes validation; otherwise, returns `false`.
+     * 
+     * Make sure you call either `validate` or `validateField` function before accessing this propery correctly:
+     * 
+     * ```typescript
+     * const validator = new Validator(data, rules)
+     * const isValid = validator.validate()
+     * validator.valid
+     * ```
      */
     get valid() {
-        const v = this.validate()
-        return v
+        return !this._errors.size
     }
 
     /**
      * Returns a negated value of `valid`.
+     * 
+     * Make sure you call either `validate` or `validateField` function before accessing this propery correctly:
+     * 
+     * ```typescript
+     * const validator = new Validator(data, rules)
+     * const isValid = validator.validate()
+     * validator.invalid
+     * ```
      */
     get inValid() {
         return !this.valid
@@ -65,48 +80,12 @@ export class Validator<T> {
     }
 
     /**
-     * Validates all properties or fields in `data`.
-     * @returns boolean
-     */
-    private validate() {
-        this.clearAllErrors()
-
-        const data = this.data
-        const rules = this.rules
-
-        if (rules) {
-            Object.keys(rules).forEach(k => {
-                const key = k as keyof T
-                const ruleList = rules[key]
-
-                if (ruleList && ruleList.length) {
-                    const value = data[key]
-
-                    ruleList.forEach(rule => {
-                        const [isValid, error] = validateRule(rule, key, value as string)
-
-                        if (!isValid) {
-                            this.setFieldError(key, error)
-
-                        }
-                    })
-
-                }
-            })
-        } else {
-            throw new Error('Validation rules not specified.')
-        }
-
-        return !this._errors.size
-    }
-
-    /**
      * Define rules for a certain field or property of `data`.
      * @param field - The field of `data`.
      * @param ruleList - An array of validation rule for rule for the field.
      */
-    setFieldRule(field: keyof T, ruleList: ValidatorRuleList){
-        if(typeof this.rules === 'undefined'){
+    setFieldRule(field: keyof T, ruleList: ValidatorRuleList) {
+        if (typeof this.rules === 'undefined') {
             this.rules = {}
         }
 
@@ -117,10 +96,57 @@ export class Validator<T> {
      * Remove rules added for a field or property.
      * @param field - The field of `data`.
      */
-    removeFieldRule(field: keyof T){
-        if(this.rules){
+    removeFieldRule(field: keyof T) {
+        if (this.rules) {
             delete this.rules[field]
         }
+    }
+
+    /**
+     * Validates a single field.
+     * @param field - The field of `data`.
+     * @returns boolean
+     */
+    validateField(field: keyof T) {
+        this.clearAllErrors()
+
+        if (!this.rules) {
+            return
+        }
+
+        const ruleList = this.rules[field]
+        if (ruleList && ruleList.length) {
+            const value = this.data[field]
+
+            ruleList.forEach(rule => {
+                const [isValid, error] = validateRule(rule, field, value as string)
+
+                if (!isValid) {
+                    this.setFieldError(field, error)
+                }
+            })
+        }
+
+        return this.valid
+    }
+
+    /**
+     * Validates all properties or fields in `data`.
+     * @returns boolean
+     */
+    validate() {
+        const rules = this.rules
+
+        if (rules) {
+            Object.keys(rules).forEach(k => {
+                const key = k as keyof T
+                this.validateField(key)
+            })
+        } else {
+            throw new Error('Validation rules not specified.')
+        }
+
+        return this.valid
     }
 
     private setFieldError(field: keyof T, error: string) {
