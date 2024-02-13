@@ -1,6 +1,6 @@
 # Freeval
 
-Freeval (for free validator) provides a flexible validation mechanism for objects based on predefined rules.
+Freeval (for free validator) provides a flexible validation mechanism for objects based on predefined rules. It's an implementation of [freeval](https://github.com/prodbyola/freeval), a struct validation package in Rust.
 
 ## Installation
 
@@ -31,7 +31,7 @@ const data: UserData = {
     password: 'securePassword123'
 };
 
-const rules: ValidatorRules<UserData> = {
+const rules: ValidatorRules<UserData /* or typeof `data` */> = {
     username: [
         { rule: 'required', error: 'Username is required' },
         { rule: 'string', error: 'Username must be a string' }
@@ -96,7 +96,7 @@ Clears all validation errors.
 
 ## Contributing
 
-Contributions to the Validator package are welcome! Feel free to submit bug reports, feature requests, or pull requests through the GitHub repository.
+Contributions to the freeval package are welcome! Feel free to submit bug reports, feature requests, or pull requests through the GitHub repository.
 
 ## License
 
