@@ -55,7 +55,7 @@ const rules: ValidatorRules<UserData /* or typeof `data` */> = {
 const validator = new Validator(data, rules);
 
 // Validate the data
-const isValid = validator.valid;
+const isValid = validator.validate();
 
 if (!isValid) {
     console.log('Validation failed. Errors:');
@@ -80,8 +80,27 @@ The `Validator<T>` class provides methods for data validation.
 
 Validates the object against the specified rules. Returns `true` if the object passes validation; otherwise, returns `false`.
 
+Make sure you call either `validate` or `validateField` function before accessing this propery correctly:
+     
+```typescript
+    const validator = new Validator(data, rules)
+    const isValid = validator.validate()
+    validator.valid
+```
+
 #### `invalid: boolean`
 Returns a negated value of `valid`.
+
+Make sure you call either `validate` or `validateField` function before accessing this propery correctly:
+     
+```typescript
+    const validator = new Validator(data, rules)
+    const isValid = validator.validate()
+    validator.invalid
+```
+
+#### `validate(): boolean`
+Validates all properties or fields in `data` based on speified rules.
 
 #### `setRules(rules: ValidatorRules<T>): void`
 

@@ -32,7 +32,7 @@ export class Validator<T> {
      * validator.invalid
      * ```
      */
-    get inValid() {
+    get invalid() {
         return !this.valid
     }
 
