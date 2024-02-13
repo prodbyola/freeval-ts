@@ -4,10 +4,15 @@ Freeval (for free validator) provides a flexible validation mechanism for object
 
 ## Installation
 
-To install the Validator package, you can use npm:
+To install the freeval, you can use npm:
 
 ```bash
 npm install freeval
+```
+
+or yarn
+```bash
+yarn add freeval
 ```
 
 ## Usage
