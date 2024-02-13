@@ -64,7 +64,7 @@ export class Validator<T> {
         this._errors = new Map()
     }
 
-    validate() {
+    private validate() {
         this.clearAllErrors()
 
         const data = this.data
