@@ -66,10 +66,10 @@ export class Validator<T> {
 
     /**
      * Clears the validation errors for a specific object property or field on `data`.
-     * @param key - A field or property of `data`.
+     * @param field - A field or property of `data`.
      */
-    clearErrors(key: keyof T) {
-        this._errors.set(key, [])
+    clearFieldErrors(field: keyof T) {
+        this._errors.set(field, [])
     }
 
     /**
@@ -108,7 +108,7 @@ export class Validator<T> {
      * @returns boolean
      */
     validateField(field: keyof T) {
-        this.clearAllErrors()
+        this.clearFieldErrors(field)
 
         if (!this.rules) {
             return
