@@ -71,16 +71,16 @@ The `Validator<T>` class provides methods for data validation.
 - `data`: The object to be validated.
 - `rules`: Optional. The validation rules for the object properties.
 
-#### `setRules(rules: ValidatorRules<T>): void`
-
-Sets the validation rules for the object properties.
-
 #### `valid: boolean`
 
 Validates the object against the specified rules. Returns `true` if the object passes validation; otherwise, returns `false`.
 
 #### `invalid: boolean`
 Returns a negated value of `valid`.
+
+#### `setRules(rules: ValidatorRules<T>): void`
+
+Sets the validation rules for the object properties.
 
 #### `getErrors(key: keyof T): string[] | undefined`
 

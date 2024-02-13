@@ -6,11 +6,17 @@ export type ValidatorRules<T> = { [Property in keyof T]?: ValidatorRuleList }
 export class Validator<T> {
     private _errors: Map<keyof T, string[]> = new Map
 
+    /**
+     * Validates the object against the specified rules. Returns `true` if the object passes validation; otherwise, returns `false`.
+     */
     get valid() {
         const v = this.validate()
         return v
     }
 
+    /**
+     * Returns a negated value of `valid`.
+     */
     get inValid() {
         return !this.valid
     }
@@ -32,12 +38,6 @@ export class Validator<T> {
      */
     setRules(rules: ValidatorRules<T>) {
         this.rules = rules
-    }
-
-    private setFieldError(field: keyof T, error: string) {
-        const e = this.errors.get(field)
-        if (e) e.push(error)
-        else this._errors.set(field, [error])
     }
 
     /**
@@ -71,18 +71,18 @@ export class Validator<T> {
         const rules = this.rules
 
         if (rules) {
-            Object.keys(rules).forEach(key => {
-                const k = key as keyof T
-                const ruleList = rules[k]
+            Object.keys(rules).forEach(k => {
+                const key = k as keyof T
+                const ruleList = rules[key]
 
                 if (ruleList && ruleList.length) {
-                    const value = data[k]
+                    const value = data[key]
 
                     ruleList.forEach(rule => {
-                        const [isValid, error] = validateRule(rule, k, value as string)
+                        const [isValid, error] = validateRule(rule, key, value as string)
 
                         if (!isValid) {
-                            this.setFieldError(k, error)
+                            this.setFieldError(key, error)
 
                         }
                     })
@@ -94,5 +94,11 @@ export class Validator<T> {
         }
 
         return !this._errors.size
+    }
+
+    private setFieldError(field: keyof T, error: string) {
+        const e = this.errors.get(field)
+        if (e) e.push(error)
+        else this._errors.set(field, [error])
     }
 }
