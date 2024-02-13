@@ -1,6 +1,6 @@
 {
   "name": "freeval",
-  "version": "1.3.6",
+  "version": "1.4.6",
   "description": "Freeval (for free validator) provides a flexible validation mechanism for objects based on predefined rules.",
   "categories": ["Keymaps", "Programming Languages"],
   "main": "dist/index.js",
