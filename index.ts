@@ -64,6 +64,10 @@ export class Validator<T> {
         this._errors = new Map()
     }
 
+    /**
+     * Validates all properties or fields in `data`.
+     * @returns boolean
+     */
     private validate() {
         this.clearAllErrors()
 
@@ -94,6 +98,29 @@ export class Validator<T> {
         }
 
         return !this._errors.size
+    }
+
+    /**
+     * Define rules for a certain field or property of `data`.
+     * @param field - The field of `data`.
+     * @param ruleList - An array of validation rule for rule for the field.
+     */
+    setFieldRule(field: keyof T, ruleList: ValidatorRuleList){
+        if(typeof this.rules === 'undefined'){
+            this.rules = {}
+        }
+
+        this.rules[field] = ruleList
+    }
+
+    /**
+     * Remove rules added for a field or property.
+     * @param field - The field of `data`.
+     */
+    removeFieldRule(field: keyof T){
+        if(this.rules){
+            delete this.rules[field]
+        }
     }
 
     private setFieldError(field: keyof T, error: string) {
