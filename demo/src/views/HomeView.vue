@@ -1,9 +1,19 @@
-<script setup lang="ts">
-import TheWelcome from '../components/TheWelcome.vue'
-</script>
-
 <template>
   <main>
-    <TheWelcome />
+    <div class="freeval_page">
+      <div class="freeval__form">
+        <AppInput />
+      </div>
+    </div>
   </main>
 </template>
+<script setup lang="ts">
+import AppInput from '@/components/AppInput.vue';
+</script>
+<style lang="scss" scoped>
+.freeval__form {
+  max-width: 500px;
+  margin: auto;
+  padding-top: 44px;
+}
+</style>
