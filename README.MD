@@ -31,18 +31,20 @@ interface UserData {
 
 // Define your data object and validation rules
 const data: UserData = {
-    username: 'JohnDoe',
-    email: 'john@example.com',
+    username: 'prodbyola',
+    email: 'prodbyola@example.com',
     password: 'securePassword123'
 };
 
 const rules: ValidatorRules<UserData /* or typeof `data` */> = {
     username: [
         { rule: 'required', error: 'Username is required' },
-        { rule: 'string', error: 'Username must be a string' }
+        // minimum of 8 characters
+        { rule: 'min=8', error: 'Username must be 8 characters minimum' }, 
     ],
     email: [
-        { rule: 'required', error: 'Email is required' },
+        // Setting an error message is OPTIONAL. Just specify the rule and pass.
+        { rule: 'required' },
         { rule: 'email', error: 'Invalid email format' }
     ],
     password: [
@@ -124,4 +126,4 @@ Contributions to the freeval package are welcome! Feel free to submit bug report
 
 ## License
 
-This project is licensed under the GNU License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the GPL License - see the [LICENSE](LICENSE) file for details.
