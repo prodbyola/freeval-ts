@@ -112,7 +112,7 @@ Sets the validation rules for the object properties.
 
 Gets the validation errors for a specific object property.
 
-#### `clearErrors(key: keyof T): void`
+#### `clearFieldErrors(key: keyof T): void`
 
 Clears the validation errors for a specific object property.
 
