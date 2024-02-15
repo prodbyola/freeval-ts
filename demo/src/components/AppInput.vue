@@ -89,6 +89,7 @@ $trans_duration: 0.4s;
     border-left: 2px solid red;
     border-radius: 4px;
     margin-top: 8px;
+    padding: 12px 0;
 
     p {
       color: red;

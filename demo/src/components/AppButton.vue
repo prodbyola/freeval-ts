@@ -1,6 +1,6 @@
 <template>
   <div class="app_btn">
-    <p>
+    <p class="subtitle_text">
       {{ label }}
     </p>
   </div>

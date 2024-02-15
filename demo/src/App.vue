@@ -26,5 +26,9 @@ p {
   width: 100%;
   justify-content: center;
   align-items: center;
+
+  .subtitle_text {
+    font-family: 'IBM Plex Serif', serif;
+  }
 }
 </style>
