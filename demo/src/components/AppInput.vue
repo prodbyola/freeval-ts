@@ -3,6 +3,7 @@
         <label>{{ label }}</label>
         <div class="app_input">
             <input :placeholder="placeholder" :autofocus="autofocus" @focus="onFocus" @blur="onBlur" />
+            <slot name="append"></slot>
         </div>
     </div>
 </template>
@@ -48,6 +49,10 @@ label {
     padding: 0 32px;
     margin-bottom: 18px;
     transition: border-color $trans_duration;
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
 
     input {
         border: none;

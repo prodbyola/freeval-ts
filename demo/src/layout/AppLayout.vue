@@ -14,7 +14,7 @@ import { RouterView } from 'vue-router'
 </script>
 <style lang="scss" scoped>
 .freeval_layout {
-  max-width: 800px;
+  max-width: 720px;
   
   .page__header {
     font-size: 1.875rem;
