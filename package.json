@@ -1,6 +1,6 @@
 {
   "name": "freeval",
-  "version": "1.4.9",
+  "version": "1.5.12",
   "description": "Freeval (for free validator) provides a flexible validation mechanism for objects based on predefined rules.",
   "categories": ["Keymaps", "Programming Languages"],
   "main": "dist/index.js",
@@ -8,8 +8,8 @@
     "start": "cd demo && yarn dev",
     "build": "rm -rf dist && tsc"
   },
-  "author": "Ajayi ",
-  "license": "ISC",
+  "author": "prodbyola@gmail.com",
+  "license": "GPL-3.0-only",
   "devDependencies": {
     "typescript": "^5.3.3"
   },
