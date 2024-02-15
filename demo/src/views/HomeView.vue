@@ -2,12 +2,25 @@
   <main>
     <div class="freeval_page">
       <div class="freeval__form">
-        <AppInput v-model="data.field1" placeholder="Enter Field Value" label="Field One" autofocus>
+        <AppInput
+          v-model="data.field1"
+          placeholder="Enter Field Value"
+          label="Field One"
+          :errors="validator.getErrors('field1')"
+          @focus="validator.clearFieldErrors('field1')"
+          autofocus
+        >
           <template v-slot:append>
             <AppIcon name="settings" color="grey" />
           </template>
         </AppInput>
-        <AppInput v-model="data.field2" placeholder="Enter Field Value" label="Field Two">
+        <AppInput
+          v-model="data.field2"
+          placeholder="Enter Field Value"
+          label="Field Two"
+          :errors="validator.getErrors('field2')"
+          @focus="validator.clearFieldErrors('field2')"
+        >
           <template v-slot:append>
             <AppIcon name="settings" color="grey" />
           </template>
