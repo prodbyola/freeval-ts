@@ -69,7 +69,7 @@ export class Validator<T> {
      * @param field - A field or property of `data`.
      */
     clearFieldErrors(field: keyof T) {
-        this._errors.set(field, [])
+        this._errors.delete(field)
     }
 
     /**

@@ -38,8 +38,11 @@ const validator = reactive(
 )
 
 const validate = () => {
+  validator.clearAllErrors()
   validator.validate()
-  console.log(validator.errors)
+  // console.log(`valid ${validator.valid}`)
+  // console.log(`invalid ${validator.invalid}`)
+  // console.log(`errors ${validator.errors.size}`)
 }
 </script>
 <style lang="scss" scoped>
