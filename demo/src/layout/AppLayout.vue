@@ -1,8 +1,8 @@
 <template>
   <div class="freeval_layout">
-    <h3 class="page__header">Welcome Freeval Demo</h3>
+    <h3 class="page__header">Welcome to Freeval Demo</h3>
     <p class="page__subtitle">
-      Hey there! Thanks a bunch for giving the Freeval package a whirl! Give it a spin and hit me up
+      Hey there! Thanks a bunch for giving the Freeval package a try! Kindly hit me up
       with your thoughts, criticisms, or wild applause. Let's see if it's as 'free' as it claims to
       be! 🚀
     </p>
