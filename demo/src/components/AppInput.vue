@@ -2,7 +2,7 @@
     <div class="app_input__container" ref="container">
         <label>{{ label }}</label>
         <div class="app_input">
-            <input :placeholder="placeholder" :autofocus="autofocus" @focus="onFocus" @blur="onBlur" />
+            <input v-model="model" :placeholder="placeholder" :autofocus="autofocus" @focus="onFocus" @blur="onBlur" />
             <slot name="append"></slot>
         </div>
     </div>
@@ -17,6 +17,7 @@ defineProps<{
 }>()
 
 const emit = defineEmits(['focus', 'blur'])
+const model = defineModel()
 
 const focusedClass = 'app_input__focused'
 const container = ref<HTMLElement | undefined>()
