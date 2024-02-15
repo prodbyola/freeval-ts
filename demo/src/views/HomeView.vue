@@ -4,12 +4,14 @@
       <div class="freeval__form">
         <AppInput placeholder="Enter Field Value" label="Field One" autofocus />
         <AppInput placeholder="Enter Field Value" label="Field Two" />
+        <AppButton label="Validate Now" />
       </div>
     </div>
   </main>
 </template>
 <script setup lang="ts">
 import AppInput from '@/components/AppInput.vue';
+import AppButton from '@/components/AppButton.vue';
 </script>
 <style lang="scss" scoped>
 .freeval__form {
