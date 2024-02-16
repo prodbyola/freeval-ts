@@ -1,3 +1,5 @@
+import { ValidatorRules } from "."
+
 const LENGTH_KEYS = ['len', 'min', 'max'] as const
 type LengthKeyType = typeof LENGTH_KEYS[number]
 
@@ -19,7 +21,7 @@ export type ValidatorRule = {
 
 type ValidatorRuleList = Array<ValidatorRule>
 
-export const defaultError = (opt: { ruleKey: ValidatorKey, field: string, size?: number, value?: number }) => {
+const defaultError = (opt: { ruleKey: ValidatorKey, field: string, size?: number, value?: number }) => {
     const { ruleKey, field, size, value } = opt
 
     switch (ruleKey) {
@@ -53,4 +55,18 @@ export const defaultError = (opt: { ruleKey: ValidatorKey, field: string, size?:
     }
 }
 
-export { LENGTH_KEYS, type ValidatorRuleList, type LengthKeyType }
+const transformRules = <T>(field: string, rules: ValidatorRuleList) => {
+    return rules.map((rule) => {
+        const ruleKey = rule.rule
+        if (!rule.error) rule.error = defaultError({
+            ruleKey,
+            field: field as string,
+            size: 3,
+            value: ruleKey === 'max' ? 2 : 4
+        })
+
+        return rule
+    })
+}
+
+export { LENGTH_KEYS, type ValidatorRuleList, type LengthKeyType, defaultError, transformRules }

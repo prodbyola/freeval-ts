@@ -1,11 +1,12 @@
 export * from './common'
-import { type ValidatorRuleList, defaultError } from "./common"
+import { type ValidatorRuleList, defaultError, transformRules } from "./common"
 import { validateRule } from "./validators"
 
 export type ValidatorRules<T> = { [Property in keyof T]?: ValidatorRuleList }
 
 export class Validator<T> {
     private _errors: Map<keyof T, string[]> = new Map
+    private rules: ValidatorRules<T> = {}
 
     /**
      * Validates the object against the specified rules. Returns `true` if the object passes validation; otherwise, returns `false`.
@@ -46,14 +47,32 @@ export class Validator<T> {
      * @param data - The object to be validated.
      * @param rules - Optional. The validation rules for the object properties. You can manually set this later by calling `setRules` method.
      */
-    constructor(private data: T, private rules?: ValidatorRules<T>) { }
+    constructor(private data: T, rules?: ValidatorRules<T>) {
+        if(rules){
+            for(const field in rules){
+                if(rules.hasOwnProperty(field)){
+                    const fr = rules[field]
+                    if(fr){
+                        this.rules[field] = transformRules(field as string, fr)
+                    }
+                }
+            }
+        }
+     }
 
     /**
      * Sets the validation rules for the object properties.
      * @param rules - The validation rules
      */
     setRules(rules: ValidatorRules<T>) {
-        this.rules = rules
+        for(const field in rules){
+            if(rules.hasOwnProperty(field)){
+                const fr = rules[field]
+                if(fr){
+                    this.rules[field] = transformRules(field as string, fr)
+                }
+            }
+        }
     }
 
     /**
@@ -86,11 +105,7 @@ export class Validator<T> {
      * @param ruleList - An array of validation rule for rule for the field.
      */
     setFieldRule(field: keyof T, ruleList: ValidatorRuleList) {
-        if (typeof this.rules === 'undefined') {
-            this.rules = {}
-        }
-
-        this.rules[field] = ruleList
+        this.rules[field] = transformRules(field as string, ruleList)
     }
 
     /**
@@ -157,20 +172,7 @@ export class Validator<T> {
      */
     getFieldRules(field: keyof T) {
         if (this.rules) {
-            const rules = this.rules[field]
-            if (rules && rules?.length) {
-                return rules.map((rule) => {
-                    const ruleKey = rule.rule
-                    if (!rule.error) rule.error = defaultError({
-                        ruleKey,
-                        field: field as string,
-                        size: 3,
-                        value: ruleKey === 'max' ? 2 : 4
-                    })
-
-                    return rule
-                })
-            }
+            return this.rules[field]
         }
     }
 
