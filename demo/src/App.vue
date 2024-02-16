@@ -30,5 +30,9 @@ p {
   .subtitle_text {
     font-family: 'IBM Plex Serif', serif;
   }
+
+  .bold_text {
+    font-weight: bold;
+  }
 }
 </style>

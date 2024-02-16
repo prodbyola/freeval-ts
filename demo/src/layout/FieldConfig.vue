@@ -1,11 +1,14 @@
 <template>
   <div class="app_modal">
     <div class="app_modal__content">
-      <div class="config_column" v-if="rules && rules.length">
-        <template v-for="(rule, index) in rules" :key="index">
-          <p>Error: {{ rule.rule }}{{ rule.size ? '=' + rule.size : '' }}</p>
-          <p v-if="rule.error" v-html="rule.error"></p>
-        </template>
+      <div class="config_column rules_column" v-if="rules && rules.length">
+        <div class="rule_box" v-for="(rule, index) in rules" :key="index">
+          <div class="rule_box__content">
+            <p><span class="bold_text">Rule:</span> {{ rule.rule }}{{ rule.size ? '=' + rule.size : '' }}</p>
+            <p style="color: red;" v-if="rule.error"><span class="bold_text">Error:</span> {{ rule.error }}</p>
+          </div>
+          <AppIcon name="close" color="#000000ac" />
+        </div>
       </div>
       <div class="config_column"></div>
     </div>
@@ -13,6 +16,7 @@
 </template>
 <script setup lang="ts">
 import { useState } from '@/stores'
+import AppIcon from '@/components/AppIcon.vue';
 
 const appState = useState()
 const rules = appState.currentFieldRules
@@ -39,6 +43,25 @@ const rules = appState.currentFieldRules
     .config_column {
       width: 50%;
     }
+
+    .rules_column {
+      padding: 24px;
+      background-color: #00000031;
+
+      .rule_box {
+        display: inline-flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        color: #000000ac;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        padding: 16px 32px;
+        border-radius: 8px;
+        background-color: white;
+        margin-bottom: 16px;
+      }
+    }
+
   }
 }
 </style>
