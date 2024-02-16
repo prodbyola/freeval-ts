@@ -40,10 +40,14 @@ const rules: ValidatorRules<UserData /* or typeof `data` */> = {
     username: [
         { rule: 'required', error: 'Username is required' },
         // minimum of 8 characters
-        { rule: 'min=8', error: 'Username must be 8 characters minimum' }, 
+        { 
+            rule: 'min', 
+            error: 'Username must be 8 characters minimum', 
+            size: 8 
+        }, 
     ],
     email: [
-        // Setting an error message is OPTIONAL. Just specify the rule and pass.
+        // Setting an error message is OPTIONAL.
         { rule: 'required' },
         { rule: 'email', error: 'Invalid email format' }
     ],

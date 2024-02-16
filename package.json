@@ -2,7 +2,10 @@
   "name": "freeval",
   "version": "1.6.12",
   "description": "Freeval (for free validator) provides a flexible validation mechanism for objects based on predefined rules.",
-  "categories": ["Keymaps", "Programming Languages"],
+  "categories": [
+    "Keymaps",
+    "Programming Languages"
+  ],
   "main": "dist/index.js",
   "scripts": {
     "dev": "cd demo && yarn dev",
@@ -13,7 +16,5 @@
   "devDependencies": {
     "typescript": "^5.3.3"
   },
-  "dependencies": {
-    "freeval": "^1.4.7"
-  }
+  "dependencies": {}
 }
