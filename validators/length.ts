@@ -1,4 +1,4 @@
-import { LENGTH_KEYS, LengthKeyType, ValidatorRule } from "../common"
+import { LENGTH_KEYS, LengthKeyType, ValidatorRule, defaultError } from "../common"
 
 const validateByLength = <T>(opt: {
     field: keyof T,
@@ -17,7 +17,7 @@ const validateByLength = <T>(opt: {
     }
 
     const size = rule.size // size required by the rule
-    let condition = false, error = 'Undefined error'
+    let condition = false
 
     if (typeof value === 'undefined'){
         throw new Error('Input value must be defined.')
@@ -29,17 +29,24 @@ const validateByLength = <T>(opt: {
     if(ruleKey ===  'len') {
         condition = size === vlen
         const gtl = vlen > size ? 'greater' : 'lesser'
-        error = `The length of ${k} input is <b>${gtl} than the required length of ${size}</b>.`
+        // error = `The length of ${k} input is <b>${gtl} than the required length of ${size}</b>.`
 
     } else if (ruleKey === 'min'){
         condition = vlen >= size
-        error = `The required <b>minimum length</b> for ${k} is <b>${size}</b>. You entered ${vlen} characters.`
+        // error = `The required <b>minimum length</b> for ${k} is <b>${size}</b>. You entered ${vlen} characters.`
     } else if (ruleKey === 'max'){
         condition = vlen <= size
-        error = `The required <b>maximum length</b> for ${k} is <b>${size}</b>. You entered ${vlen} characters.`
+        // error = `The required <b>maximum length</b> for ${k} is <b>${size}</b>. You entered ${vlen} characters.`
     }
 
-    if(typeof rule.error !== 'undefined') error = rule.error
+    let error = rule.error ?? defaultError({
+        ruleKey,
+        field: k,
+        size,
+        value: vlen
+    })
+
+    // if(typeof rule.error !== 'undefined') error = rule.error
     
     return [condition, error]
 
