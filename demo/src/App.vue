@@ -14,12 +14,12 @@ h5,
 h6 {
   font-family: 'Inter', sans-serif;
   font-weight: bold;
-  color: vars.$bg_color;
+  color: white;
 }
 
 p {
   font-family: 'Inter', sans-serif;
-  color: vars.$bg_color;
+  color: white;
 }
 
 #app {
@@ -37,6 +37,15 @@ p {
 
   .bold_text {
     font-weight: bold;
+  }
+
+  .page__header {
+    font-size: 1.875rem;
+    text-align: center;
+  }
+  
+  .page__subtitle {
+    font-size: 1.125rem;
   }
 }
 </style>

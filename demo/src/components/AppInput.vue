@@ -16,6 +16,7 @@
         :autofocus="autofocus"
         @focus="onFocus"
         @blur="onBlur"
+        :type="type"
       />
       <slot name="append"></slot>
     </div>

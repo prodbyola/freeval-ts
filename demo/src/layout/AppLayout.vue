@@ -20,14 +20,5 @@ const appState = useState()
 <style lang="scss" scoped>
 .freeval_layout {
   max-width: 720px;
-  
-  .page__header {
-    font-size: 1.875rem;
-    text-align: center;
-  }
-  
-  .page__subtitle {
-    font-size: 1.125rem;
-  }
 }
 </style>

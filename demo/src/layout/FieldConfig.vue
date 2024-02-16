@@ -1,6 +1,7 @@
 <template>
   <div class="app_modal">
     <div class="app_modal__content">
+      <h3 class="page__header">Validation Settings for {{ appState.currentField }}</h3>
       <div class="config_column rules_column" v-if="rules && rules.length">
         <div class="rule_box" v-for="(rule, index) in rules" :key="index">
           <div class="rule_box__content">
@@ -17,7 +18,11 @@
       </div>
       <div class="config_column config_form">
         <AppInput label="Rule" :options="rulekeys" v-model="newRule.rule" type="select" />
-        <AppInput label="Error" v-model="newRule.error" />
+        <AppInput
+          label="Error"
+          placeholder="Optionally Enter Validation Error"
+          v-model="newRule.error"
+        />
         <AppInput
           v-if="lengthTypes.includes(newRule.rule as string)"
           label="Rule Size"
@@ -25,6 +30,7 @@
           type="number"
         />
         <AppButton label="Add Rule" />
+        <AppButton class="close_btn" label="Go Back to Demo" @click="close" transparent border />
       </div>
     </div>
   </div>
@@ -49,6 +55,10 @@ const rulekeys = ['required', 'email', 'password', 'number', ...lengthTypes]
 const newRule = reactive<ValidatorRule>({
   rule: 'required'
 })
+
+const close = () => {
+  appState.showModal(undefined)
+}
 </script>
 <style lang="scss" scoped>
 @use '../assets/variables' as vars;
@@ -63,17 +73,26 @@ const newRule = reactive<ValidatorRule>({
   height: 100%;
   z-index: 99;
   background-color: #0000002a;
-
+  
   .app_modal__content {
     padding: 2rem;
     height: 100%;
     width: 100%;
     background-color: vars.$bg_color;
     display: flex;
+    flex-wrap: wrap;
+
+    .page__header {
+      width: 100%;
+    }
 
     .config_column {
       width: 50%;
       padding: 24px;
+
+      .close_btn {
+        margin-top: 16px;
+      }
     }
 
     .rules_column {
@@ -92,6 +111,12 @@ const newRule = reactive<ValidatorRule>({
         border-radius: 8px;
         background-color: #ffffffb6;
         margin-bottom: 16px;
+
+        .rule_box__content {
+          p {
+            color: vars.$bg_color;
+          }
+        }
       }
     }
   }

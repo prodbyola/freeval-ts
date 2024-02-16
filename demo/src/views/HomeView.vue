@@ -22,7 +22,7 @@
           @focus="validator.clearFieldErrors('field2')"
         >
           <template v-slot:append>
-            <AppIcon name="settings" color="grey" @click="showConfig('field1')" />
+            <AppIcon name="settings" color="grey" @click="showConfig('field2')" />
           </template>
         </AppInput>
         <AppButton @click="validate" label="Validate Now" />
