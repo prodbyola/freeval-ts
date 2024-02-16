@@ -11,7 +11,7 @@
           autofocus
         >
           <template v-slot:append>
-            <AppIcon name="settings" color="grey" />
+            <AppIcon name="settings" color="grey" @click="showConfig('field1')" />
           </template>
         </AppInput>
         <AppInput
@@ -22,7 +22,7 @@
           @focus="validator.clearFieldErrors('field2')"
         >
           <template v-slot:append>
-            <AppIcon name="settings" color="grey" />
+            <AppIcon name="settings" color="grey" @click="showConfig('field1')" />
           </template>
         </AppInput>
         <AppButton @click="validate" label="Validate Now" />
@@ -42,12 +42,20 @@ const appState = useState()
 const data = appState.data
 const validator = appState.validator
 
+type DataKey = keyof typeof data
+
 const validate = () => {
   validator.validate()
   if(validator.valid){
     console.log('Validation successful!')
   }
 }
+
+const showConfig = (field: DataKey) => {
+  appState.currentField = field
+  appState.showModal('config')
+}
+
 </script>
 <style lang="scss" scoped>
 .freeval__form {

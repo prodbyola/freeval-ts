@@ -14,12 +14,12 @@ h5,
 h6 {
   font-family: 'Inter', sans-serif;
   font-weight: bold;
-  color: white;
+  color: vars.$bg_color;
 }
 
 p {
   font-family: 'Inter', sans-serif;
-  color: white;
+  color: vars.$bg_color;
 }
 
 #app {

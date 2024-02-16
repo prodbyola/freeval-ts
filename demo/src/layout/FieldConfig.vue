@@ -51,6 +51,8 @@ const newRule = reactive<ValidatorRule>({
 })
 </script>
 <style lang="scss" scoped>
+@use '../assets/variables' as vars;
+
 .app_modal {
   position: absolute;
   left: 0;
@@ -66,7 +68,7 @@ const newRule = reactive<ValidatorRule>({
     padding: 2rem;
     height: 100%;
     width: 100%;
-    background-color: white;
+    background-color: vars.$bg_color;
     display: flex;
 
     .config_column {
@@ -75,18 +77,20 @@ const newRule = reactive<ValidatorRule>({
     }
 
     .rules_column {
-      background-color: #00000031;
+      background-color: #ffffff3d;
+      backdrop-filter: blur(33px);
+      background-blend-mode: overlay;
+      border-radius: 4px;
 
       .rule_box {
         display: inline-flex;
         align-items: center;
         justify-content: space-between;
         width: 100%;
-        color: #000000ac;
-        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        box-shadow: 0 10px 15px rgb(0 0 0 / 20%);
         padding: 16px 32px;
         border-radius: 8px;
-        background-color: white;
+        background-color: #ffffffb6;
         margin-bottom: 16px;
       }
     }
