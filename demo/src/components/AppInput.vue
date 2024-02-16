@@ -74,6 +74,7 @@ $trans_duration: 0.4s;
   .app_input {
     border-radius: 10px;
     height: 69px;
+    padding: 0 32px;
     transition: border-color $trans_duration;
     display: inline-flex;
     align-items: center;
@@ -89,7 +90,6 @@ $trans_duration: 0.4s;
       height: 100%;
       width: 100%;
       font-weight: bold;
-      padding: 0 32px;
     }
 
     input::placeholder {
@@ -102,7 +102,15 @@ $trans_duration: 0.4s;
     border-left: 2px solid red;
     border-radius: 4px;
     margin-top: 8px;
-    padding: 12px 0;
+    padding: 12px 8px;
+
+    ul {
+      padding-left: 24px;
+    }
+
+    li::marker {
+      color: white;
+    }
 
     p {
       color: red;
