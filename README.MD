@@ -120,6 +120,10 @@ Clears the validation errors for a specific object property.
 
 Clears all validation errors.
 
+#### `getFieldRules(key: keyof T): ValidatorRule[] | undefined`
+
+Retrieves validation rules defined for a data `field`. Returns `undefined` if no rule is declared for `field`.
+
 ## Contributing
 
 Contributions to the freeval package are welcome! Feel free to submit bug reports, feature requests, or pull requests through the GitHub repository.

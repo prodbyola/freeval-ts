@@ -1,4 +1,4 @@
-import { ValidatorRuleList } from "./common"
+import { ValidatorRuleList, defaultError } from "./common"
 import { validateRule } from "./validators"
 
 export type ValidatorRules<T> = { [Property in keyof T]?: ValidatorRuleList }
@@ -147,6 +147,30 @@ export class Validator<T> {
         }
 
         return this.valid
+    }
+
+    /**
+     * Retrieves validation rules defined for a data `field`. Returns `undefined` if no rule is declared for `field`.
+     * @param field 
+     * @returns `ValidatorRule[]` | `undefined`
+     */
+    getFieldRules(field: keyof T) {
+        if (this.rules) {
+            const rules = this.rules[field]
+            if (rules && rules?.length) {
+                return rules.map((rule) => {
+                    const ruleKey = rule.rule
+                    if (!rule.error) rule.error = defaultError({
+                        ruleKey,
+                        field: field as string,
+                        size: 3,
+                        value: ruleKey === 'max' ? 2 : 4
+                    })
+
+                    return rule
+                })
+            }
+        }
     }
 
     private setFieldError(field: keyof T, error: string) {
