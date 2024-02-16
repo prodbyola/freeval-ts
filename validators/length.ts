@@ -43,8 +43,6 @@ const validateByLength = <T>(opt: {
         value: vlen
     })
 
-    // if(typeof rule.error !== 'undefined') error = rule.error
-    
     return [condition, error]
 
 }
