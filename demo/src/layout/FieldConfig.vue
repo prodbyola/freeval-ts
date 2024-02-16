@@ -2,8 +2,8 @@
   <div class="app_modal">
     <div class="app_modal__content">
       <h3 class="page__header">Validation Settings for {{ appState.currentField }}</h3>
-      <div class="config_column rules_column" v-if="rules && rules.length">
-        <div class="rule_box" v-for="(rule, index) in rules" :key="index">
+      <div class="config_column rules_column" v-if="appState.rules && appState.rules.length">
+        <div class="rule_box" v-for="(rule, index) in appState.rules" :key="index">
           <div class="rule_box__content">
             <p>
               <span class="bold_text">Rule:</span> {{ rule.rule
@@ -45,7 +45,6 @@ import { reactive } from 'vue'
 import { type ValidatorRule } from 'freeval/common'
 
 const appState = useState()
-const rules = appState.rules
 
 const lengthTypes = ['len', 'min', 'max']
 const rulekeys = ['required', 'email', 'password', 'number', ...lengthTypes]
