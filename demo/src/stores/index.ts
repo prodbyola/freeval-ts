@@ -18,7 +18,12 @@ export const useState = defineStore('useState', () => {
   const validator = new Validator(data, dataRules)
   const currentConfigField = ref<keyof typeof data>('field1')
 
-  const rules = computed(() => validator.getFieldRules(currentConfigField.value))
+  const rules = computed(() => {
+    const vr = validator.rules
+    if(vr) return vr[currentConfigField.value]
+
+    return undefined
+  })
   const showModal = (m: typeof modal.value) => modal.value = m
 
   const addRule = (rule: ValidatorRule) => {

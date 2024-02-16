@@ -6,11 +6,6 @@ export type ValidatorRules<T> = { [Property in keyof T]?: ValidatorRuleList }
 
 export class Validator<T> {
     private _errors: Map<keyof T, string[]> = new Map
-    private _rules: ValidatorRules<T> | undefined
-
-    get rules(){
-        return this._rules
-    }
 
     /**
      * Validates the object against the specified rules. Returns `true` if the object passes validation; otherwise, returns `false`.
@@ -51,16 +46,14 @@ export class Validator<T> {
      * @param data - The object to be validated.
      * @param rules - Optional. The validation rules for the object properties. You can manually set this later by calling `setRules` method.
      */
-    constructor(private data: T, rules?: ValidatorRules<T>) {
-        this._rules = rules
-     }
+    constructor(private data: T, private rules?: ValidatorRules<T>) { }
 
     /**
      * Sets the validation rules for the object properties.
      * @param rules - The validation rules
      */
     setRules(rules: ValidatorRules<T>) {
-        this._rules = rules
+        this.rules = rules
     }
 
     /**
@@ -93,11 +86,11 @@ export class Validator<T> {
      * @param ruleList - An array of validation rule for rule for the field.
      */
     setFieldRule(field: keyof T, ruleList: ValidatorRuleList) {
-        if (typeof this._rules === 'undefined') {
-            this._rules = {}
+        if (typeof this.rules === 'undefined') {
+            this.rules = {}
         }
 
-        this._rules[field] = ruleList
+        this.rules[field] = ruleList
     }
 
     /**
