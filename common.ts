@@ -24,29 +24,29 @@ export const defaultError = (opt: { ruleKey: ValidatorKey, field: string, size?:
 
     switch (ruleKey) {
         case 'required':
-            return `${field} field is <b>required</b>.`
+            return `${field} field is required.`
 
         case 'email':
-            return `${field} field must be a <b>valid email</b>.`
+            return `${field} field must be a valid email.`
 
         case 'password':
-            return `${field} field must contain at least <b>1 lowercase</b> alphabetical character, <b>1 uppercase</b> alphabetical character, <b>1 numeric</b> character, one <b>special character</b> and must be <b>eight characters</b> or longer.`
+            return `${field} field must contain at least 1 lowercase alphabetical character, 1 uppercase alphabetical character, 1 numeric character, one special character and must be eight characters or longer.`
 
         case 'number':
-            return `${field} field must contain <b>digits only</b>. Please <b>remove letters or whitespaces.</b>.`
+            return `${field} field must contain digits only. Please remove letters or whitespaces..`
 
         case 'len':
             const s = size ?? 0
             const v = value ?? 0
 
             const gtl = v > s ? 'greater' : 'lesser'
-            return `The length of ${field} input is <b>${gtl} than the required length of ${s}</b>.`
+            return `The length of ${field} input is ${gtl} than the required length of ${s}.`
 
         case 'min':
-            return `The required <b>minimum length</b> for ${field} is <b>${size}</b>. You entered ${value} characters.`
+            return `The required minimum length for ${field} is ${size}. You entered ${value} characters.`
 
         case 'max':
-            return `The required <b>maximum length</b> for ${field} is <b>${size}</b>. You entered ${value} characters.`
+            return `The required maximum length for ${field} is ${size}. You entered ${value} characters.`
 
         default:
             return 'Undefined error.'

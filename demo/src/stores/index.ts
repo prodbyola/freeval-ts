@@ -20,7 +20,7 @@ export const useState = defineStore('useState', () => {
   )
   
   const currentField = ref<keyof typeof data>('field1')
-  const currentFieldRules = computed(() => rules[currentField.value])
+  const currentFieldRules = computed(() => validator.getFieldRules(currentField.value))
   const showModal = (m: typeof modal.value) => modal.value = m
 
   return { modal, data, validator, currentField, currentFieldRules, showModal }

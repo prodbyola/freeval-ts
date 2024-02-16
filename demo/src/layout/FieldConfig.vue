@@ -3,8 +3,8 @@
     <div class="app_modal__content">
       <div class="config_column" v-if="rules && rules.length">
         <template v-for="(rule, index) in rules" :key="index">
-          <p>{{ rule.rule }}{{ rule.size ? '=' + rule.size : '' }}</p>
-          <p v-if="rule.error">{{ rule.error }}</p>
+          <p>Error: {{ rule.rule }}{{ rule.size ? '=' + rule.size : '' }}</p>
+          <p v-if="rule.error" v-html="rule.error"></p>
         </template>
       </div>
       <div class="config_column"></div>
