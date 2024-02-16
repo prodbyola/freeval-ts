@@ -5,7 +5,7 @@
   "categories": ["Keymaps", "Programming Languages"],
   "main": "dist/index.js",
   "scripts": {
-    "start": "cd demo && yarn dev",
+    "dev": "cd demo && yarn dev",
     "build": "rm -rf dist && tsc"
   },
   "author": "prodbyola@gmail.com",

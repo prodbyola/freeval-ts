@@ -35,20 +35,12 @@ import AppInput from '@/components/AppInput.vue'
 import AppButton from '@/components/AppButton.vue'
 import AppIcon from '@/components/AppIcon.vue'
 
-import { reactive } from 'vue'
-import { Validator } from 'freeval'
+import { useState } from '@/stores'
 
-const data = {
-  field1: '',
-  field2: ''
-}
+const appState = useState()
 
-const validator = reactive(
-  new Validator(data, {
-    field1: [{ rule: 'required' }],
-    field2: [{ rule: 'required' }, { rule: 'password' }]
-  })
-)
+const data = appState.data
+const validator = appState.validator
 
 const validate = () => {
   validator.validate()

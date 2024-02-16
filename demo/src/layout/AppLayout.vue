@@ -8,9 +8,14 @@
     </p>
     <RouterView />
   </div>
+  <FieldConfig v-if="appState.modal === 'config'" />
 </template>
 <script setup lang="ts">
+import FieldConfig from './FieldConfig.vue';
 import { RouterView } from 'vue-router'
+import { useState } from '@/stores';
+
+const appState = useState()
 </script>
 <style lang="scss" scoped>
 .freeval_layout {
