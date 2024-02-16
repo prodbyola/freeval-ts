@@ -1,4 +1,4 @@
-import { LENGTH_KEYS, LengthKeyType, ValidatorRule, defaultError } from "../common"
+import { LENGTH_KEYS, type LengthKeyType, type ValidatorRule, defaultError } from "../common"
 
 const validateByLength = <T>(opt: {
     field: keyof T,

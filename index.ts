@@ -1,5 +1,5 @@
 export * from './common'
-import { ValidatorRuleList, defaultError } from "./common"
+import { type ValidatorRuleList, defaultError } from "./common"
 import { validateRule } from "./validators"
 
 export type ValidatorRules<T> = { [Property in keyof T]?: ValidatorRuleList }

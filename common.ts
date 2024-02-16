@@ -53,4 +53,4 @@ export const defaultError = (opt: { ruleKey: ValidatorKey, field: string, size?:
     }
 }
 
-export { LENGTH_KEYS, ValidatorRuleList, LengthKeyType }
+export { LENGTH_KEYS, type ValidatorRuleList, type LengthKeyType }
