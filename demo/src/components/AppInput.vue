@@ -74,7 +74,6 @@ $trans_duration: 0.4s;
   .app_input {
     border-radius: 10px;
     height: 69px;
-    padding: 0 32px;
     transition: border-color $trans_duration;
     display: inline-flex;
     align-items: center;
@@ -83,12 +82,14 @@ $trans_duration: 0.4s;
     background-color: white;
     border: 2px white solid;
 
-    input, select {
+    input,
+    select {
       border: none;
       outline: none;
       height: 100%;
       width: 100%;
       font-weight: bold;
+      padding: 0 32px;
     }
 
     input::placeholder {
