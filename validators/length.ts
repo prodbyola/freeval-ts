@@ -29,14 +29,11 @@ const validateByLength = <T>(opt: {
     if(ruleKey ===  'len') {
         condition = size === vlen
         const gtl = vlen > size ? 'greater' : 'lesser'
-        // error = `The length of ${k} input is <b>${gtl} than the required length of ${size}</b>.`
 
     } else if (ruleKey === 'min'){
         condition = vlen >= size
-        // error = `The required <b>minimum length</b> for ${k} is <b>${size}</b>. You entered ${vlen} characters.`
     } else if (ruleKey === 'max'){
         condition = vlen <= size
-        // error = `The required <b>maximum length</b> for ${k} is <b>${size}</b>. You entered ${vlen} characters.`
     }
 
     let error = rule.error ?? defaultError({
