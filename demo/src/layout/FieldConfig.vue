@@ -29,7 +29,7 @@
           v-model="newRule.size"
           type="number"
         />
-        <AppButton label="Add Rule" />
+        <AppButton label="Add Rule" @click="addRule" />
         <AppButton class="close_btn" label="Go Back to Demo" @click="close" transparent border />
       </div>
     </div>
@@ -45,9 +45,7 @@ import { reactive } from 'vue'
 import { type ValidatorRule } from 'freeval/common'
 
 const appState = useState()
-const validator = appState.validator
-
-const rules = validator.getFieldRules(appState.currentField)
+const rules = appState.rules
 
 const lengthTypes = ['len', 'min', 'max']
 const rulekeys = ['required', 'email', 'password', 'number', ...lengthTypes]
@@ -55,6 +53,8 @@ const rulekeys = ['required', 'email', 'password', 'number', ...lengthTypes]
 const newRule = reactive<ValidatorRule>({
   rule: 'required'
 })
+
+const addRule = () => appState.addRule(newRule)
 
 const close = () => {
   appState.showModal(undefined)
@@ -72,7 +72,7 @@ const close = () => {
   width: 100%;
   z-index: 99;
   background-color: #0000002a;
-  
+
   .app_modal__content {
     padding: 2rem;
     height: 100%;
@@ -140,7 +140,6 @@ const close = () => {
         padding: 0;
         margin-top: 24px;
       }
-
     }
   }
 }

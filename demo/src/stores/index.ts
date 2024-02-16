@@ -1,6 +1,6 @@
-import { reactive, ref } from 'vue'
+import { computed, reactive, ref } from 'vue'
 import { defineStore } from 'pinia'
-import { Validator } from 'freeval'
+import { Validator, type ValidatorRule, type ValidatorRules } from 'freeval'
 
 export const useState = defineStore('useState', () => {
   const modal = ref<'config' | undefined>()
@@ -10,16 +10,19 @@ export const useState = defineStore('useState', () => {
     field2: ''
   })
 
-  const validator = reactive(
-    new Validator(data, {
-      field1: [{ rule: 'required' }],
-      field2: [{ rule: 'required' }, { rule: 'password' }]
-    })
-  )
-  
-  const currentField = ref<keyof typeof data>('field1')
-  // const currentFieldRules = computed(() => validator.getFieldRules(currentField.value))
+  const dataRules = reactive<ValidatorRules<typeof data>>({
+    field1: [{ rule: 'required' }],
+    field2: [{ rule: 'required' }, { rule: 'password' }]
+  })
+
+  const validator = new Validator(data, dataRules)
+  const currentConfigField = ref<keyof typeof data>('field1')
+
+  const rules = computed(() => validator.getFieldRules(currentConfigField.value))
   const showModal = (m: typeof modal.value) => modal.value = m
 
-  return { modal, data, validator, currentField, showModal }
+  const addRule = (rule: ValidatorRule) => {
+    dataRules[currentConfigField.value]?.push(rule)
+  }
+  return { modal, data, rules, validator, currentField: currentConfigField, showModal, addRule }
 })
