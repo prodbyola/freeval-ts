@@ -2,7 +2,15 @@
   <div class="app_input__container" ref="container">
     <label>{{ label }}</label>
     <div class="app_input">
+      <select v-if="type === 'select'" v-model="model">
+        <template v-if="options && options.length">
+          <option v-for="(opt, index) in options" :key="index">
+            <p>{{ opt }}</p>
+          </option>
+        </template>
+      </select>
       <input
+        v-else
         v-model="model"
         :placeholder="placeholder"
         :autofocus="autofocus"
@@ -28,6 +36,8 @@ defineProps<{
   label: string
   autofocus?: boolean
   errors?: string[]
+  options?: string[]
+  type?: string
 }>()
 
 const emit = defineEmits(['focus', 'blur'])
@@ -56,12 +66,11 @@ $trans_duration: 0.4s;
 
   label {
     font-weight: bold;
-    color: #5d5d5d;
     transition: color $trans_duration;
+    color: white;
   }
 
   .app_input {
-    border: 2px vars.$line_color solid;
     border-radius: 10px;
     height: 69px;
     padding: 0 32px;
@@ -70,8 +79,10 @@ $trans_duration: 0.4s;
     align-items: center;
     justify-content: space-between;
     width: 100%;
+    background-color: white;
+    border: 2px white solid;
 
-    input {
+    input, select {
       border: none;
       outline: none;
       height: 100%;
@@ -98,22 +109,18 @@ $trans_duration: 0.4s;
 }
 
 .app_input__container:hover {
-  label {
-    color: vars.$secondary_color;
+  .app_input {
+    border: 2px vars.$primary_color solid;
   }
 
-  .app_input {
-    border-color: vars.$secondary_color;
+  input::placeholder {
+    color: vars.$primary_color;
   }
 }
 
 .app_input__container.app_input__focused {
-  label {
-    color: vars.$primary_color;
-  }
-
   .app_input {
-    border-color: vars.$primary_color;
+    border: 2px vars.$primary_color solid;
   }
 }
 </style>

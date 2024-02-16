@@ -18,7 +18,7 @@ defineProps<{
   justify-content: center;
   align-items: center;
   height: 62px;
-  background-color: vars.$primary_color;
+  background: linear-gradient(#3D83FF, #236DDF);
   width: 100%;
   cursor: pointer;
   border-radius: 8px;
