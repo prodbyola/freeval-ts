@@ -67,7 +67,7 @@ const close = () => {
 @use '../assets/variables' as vars;
 
 .app_modal {
-  position: absolute;
+  position: fixed;
   left: 0;
   top: 0;
   min-height: 100vh;
