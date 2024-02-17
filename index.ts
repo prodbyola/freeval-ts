@@ -93,12 +93,25 @@ export class Validator<T> {
     }
 
     /**
-     * Remove rules added for a field or property.
+     * Remove all rules added for a field or property.
      * @param field - The field of `data`.
      */
-    removeFieldRule(field: keyof T) {
+    removeFieldRules(field: keyof T) {
         if (this.rules) {
             delete this.rules[field]
+        }
+    }
+
+    /**
+     * Remove a specific rule added to a field or property.
+     * @param field 
+     * @param rule 
+     */
+    removeFieldRule(field: keyof T, rule: ValidatorRule){
+        const exist = this.ruleExists(field, rule)
+        if(exist){
+            const index = this.rules[field]?.indexOf(exist) as number
+            this.rules[field]?.splice(index, 1)
         }
     }
 
@@ -161,6 +174,22 @@ export class Validator<T> {
     }
 
     /**
+     * Insert validation rule into field's rule list.
+     * @param field 
+     * @param rule 
+     */
+    insertFieldRule(field: keyof T, rule: ValidatorRule){   
+        if(this.rules){
+            if(!this.rules[field]) this.rules[field] = []
+
+            if(!this.ruleExists(field, rule)){
+                const r = prepareRule(field, rule)
+                this.rules[field]?.push(r)
+            }
+        }
+    }
+
+    /**
      * Checks if a rule is already declared for a validation field.
      * @param field 
      * @param rule 
@@ -170,17 +199,6 @@ export class Validator<T> {
         const fr = this.getFieldRules(field)
         if(fr){
             return fr.find((r) => r.rule === rule.rule)
-        }
-    }
-
-    private insertRule(field: keyof T, rule: ValidatorRule){
-        if(!this.rules[field]) this.rules[field] = []
-
-        if(this.rules){
-            if(!this.ruleExists(field, rule)){
-                const r = prepareRule(field, rule)
-                this.rules[field]?.push(r)
-            }
         }
     }
 
@@ -195,7 +213,7 @@ export class Validator<T> {
     }
 
     private insertFieldRules(field: keyof T, fieldRules: ValidatorRuleList){
-        fieldRules.forEach(rule => this.insertRule(field, rule))
+        fieldRules.forEach(rule => this.insertFieldRule(field, rule))
     }
 
     private setFieldError(field: keyof T, error: string) {

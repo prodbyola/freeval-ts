@@ -15,31 +15,18 @@ export const useState = defineStore('useState', () => {
     field2: [{ rule: 'required' }, { rule: 'password' }]
   })
 
-  const validator = new Validator(data, dataRules)
+  const validator = reactive(new Validator(data, dataRules))
   const currentConfigField = ref<keyof typeof data>('field1')
 
   const rules = computed(() => validator.getFieldRules(currentConfigField.value))
   const showModal = (m: typeof modal.value) => modal.value = m
 
   const addRule = (rule: ValidatorRule) => {
-    const dr = dataRules[currentConfigField.value]
-    if (typeof dr !== 'undefined') {
-      dr.push(rule)
-    }
+    validator.insertFieldRule(currentConfigField.value, rule)
   }
 
   const removeRule = (rule: ValidatorRule) => {
-    const dr = dataRules[currentConfigField.value]
-
-    if (typeof dr !== 'undefined') {
-      dr.forEach(r => {
-        if(r.rule === rule.rule) {
-          const index = dr.indexOf(r)
-          dr.splice(index, 1)
-        }
-      })
-      
-    }
+    validator.removeFieldRule(currentConfigField.value, rule)
   }
 
   return { modal, data, rules, validator, currentField: currentConfigField, showModal, addRule, removeRule }
