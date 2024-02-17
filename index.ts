@@ -174,7 +174,9 @@ export class Validator<T> {
     }
 
     private insertRule(field: keyof T, rule: ValidatorRule){
-        if(this.rules && this.rules[field]){
+        if(!this.rules[field]) this.rules[field] = []
+
+        if(this.rules){
             if(!this.ruleExists(field, rule)){
                 const r = prepareRule(field, rule)
                 this.rules[field]?.push(r)
@@ -186,6 +188,7 @@ export class Validator<T> {
         for(const field in rules){
             if(rules.hasOwnProperty(field)){
                 const fr = rules[field]
+                
                 if(fr && fr.length) this.insertFieldRules(field, fr)
             }
         }
