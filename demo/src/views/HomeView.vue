@@ -29,6 +29,7 @@
         <div v-if="successMsg" class="success_msg">
           <p>{{ successMsg }}</p>
         </div>
+        <AppSocials />
       </div>
     </div>
   </main>
@@ -37,6 +38,7 @@
 import AppInput from '@/components/AppInput.vue'
 import AppButton from '@/components/AppButton.vue'
 import AppIcon from '@/components/AppIcon.vue'
+import AppSocials from '@/layout/AppSocials.vue'
 
 import { useState } from '@/stores'
 import { ref } from 'vue'

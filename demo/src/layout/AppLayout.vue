@@ -12,6 +12,7 @@
 </template>
 <script setup lang="ts">
 import FieldConfig from './FieldConfig.vue';
+
 import { RouterView } from 'vue-router'
 import { useState } from '@/stores';
 
