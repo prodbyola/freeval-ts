@@ -2,19 +2,22 @@
   <div class="app_modal">
     <div class="app_modal__content">
       <h3 class="page__header">Validation Settings for {{ appState.currentField }}</h3>
-      <div class="config_column rules_column" v-if="appState.rules && appState.rules.length">
-        <div class="rule_box" v-for="(rule, index) in appState.rules" :key="index">
-          <div class="rule_box__content">
-            <p>
-              <span class="bold_text">Rule:</span> {{ rule.rule
-              }}{{ rule.size ? '=' + rule.size : '' }}
-            </p>
-            <p style="color: red" v-if="rule.error">
-              <span class="bold_text">Error:</span> {{ rule.error }}
-            </p>
+      <div class="config_column rules_column">
+        <template v-if="appState.rules && appState.rules.length">
+
+          <div class="rule_box" v-for="(rule, index) in appState.rules" :key="index">
+            <div class="rule_box__content">
+              <p>
+                <span class="bold_text">Rule:</span> {{ rule.rule
+                }}{{ rule.size ? '=' + rule.size : '' }}
+              </p>
+              <p style="color: red" v-if="rule.error">
+                <span class="bold_text">Error:</span> {{ rule.error }}
+              </p>
+            </div>
+            <AppIcon name="close" color="#000000ac" @click="() => removeRule(rule)" />
           </div>
-          <AppIcon name="close" color="#000000ac" @click="() => removeRule(rule)" />
-        </div>
+        </template>
       </div>
       <div class="config_column config_form">
         <AppInput label="Rule" :options="rulekeys" v-model="newRule.rule" type="select" />
@@ -75,7 +78,7 @@ const close = () => {
 
   .app_modal__content {
     padding: 2rem;
-    height: 100%;
+    min-height: 100vh;
     width: 100%;
     background-color: vars.$bg_color;
     display: flex;
