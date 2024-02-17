@@ -1,5 +1,5 @@
 export * from './common'
-import { type ValidatorRuleList, defaultError, transformRules } from "./common"
+import { type ValidatorRuleList, ValidatorRule, prepareRule } from "./common"
 import { validateRule } from "./validators"
 
 export type ValidatorRules<T> = { [Property in keyof T]?: ValidatorRuleList }
@@ -48,16 +48,7 @@ export class Validator<T> {
      * @param rules - Optional. The validation rules for the object properties. You can manually set this later by calling `setRules` method.
      */
     constructor(private data: T, rules?: ValidatorRules<T>) {
-        if(rules){
-            for(const field in rules){
-                if(rules.hasOwnProperty(field)){
-                    const fr = rules[field]
-                    if(fr){
-                        this.rules[field] = transformRules(field as string, fr)
-                    }
-                }
-            }
-        }
+        if(rules) this.insertRules(rules)
      }
 
     /**
@@ -65,14 +56,7 @@ export class Validator<T> {
      * @param rules - The validation rules
      */
     setRules(rules: ValidatorRules<T>) {
-        for(const field in rules){
-            if(rules.hasOwnProperty(field)){
-                const fr = rules[field]
-                if(fr){
-                    this.rules[field] = transformRules(field as string, fr)
-                }
-            }
-        }
+        this.insertRules(rules)
     }
 
     /**
@@ -105,7 +89,7 @@ export class Validator<T> {
      * @param ruleList - An array of validation rule for rule for the field.
      */
     setFieldRule(field: keyof T, ruleList: ValidatorRuleList) {
-        this.rules[field] = transformRules(field as string, ruleList)
+        this.insertFieldRules(field, ruleList)
     }
 
     /**
@@ -174,6 +158,41 @@ export class Validator<T> {
         if (this.rules) {
             return this.rules[field]
         }
+    }
+
+    /**
+     * Checks if a rule is already declared for a validation field.
+     * @param field 
+     * @param rule 
+     * @returns 
+     */
+    private ruleExists(field: keyof T, rule: ValidatorRule){
+        const fr = this.getFieldRules(field)
+        if(fr){
+            return fr.find((r) => r.rule === rule.rule)
+        }
+    }
+
+    private insertRule(field: keyof T, rule: ValidatorRule){
+        if(this.rules && this.rules[field]){
+            if(!this.ruleExists(field, rule)){
+                const r = prepareRule(field, rule)
+                this.rules[field]?.push(r)
+            }
+        }
+    }
+
+    private insertRules(rules: ValidatorRules<T>){
+        for(const field in rules){
+            if(rules.hasOwnProperty(field)){
+                const fr = rules[field]
+                if(fr && fr.length) this.insertFieldRules(field, fr)
+            }
+        }
+    }
+
+    private insertFieldRules(field: keyof T, fieldRules: ValidatorRuleList){
+        fieldRules.forEach(rule => this.insertRule(field, rule))
     }
 
     private setFieldError(field: keyof T, error: string) {

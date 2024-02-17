@@ -21,7 +21,17 @@ export type ValidatorRule = {
 
 type ValidatorRuleList = Array<ValidatorRule>
 
-const defaultError = (opt: { ruleKey: ValidatorKey, field: string, size?: number, value?: number }) => {
+/**
+ * Generates default error message for a validation rule.
+ * @param opt 
+ * @returns 
+ */
+const defaultError = (opt: { 
+    ruleKey: ValidatorKey, 
+    field: string, 
+    size?: number, 
+    value?: number 
+}) => {
     const { ruleKey, field, size, value } = opt
 
     switch (ruleKey) {
@@ -55,18 +65,23 @@ const defaultError = (opt: { ruleKey: ValidatorKey, field: string, size?: number
     }
 }
 
-const transformRules = <T>(field: string, rules: ValidatorRuleList) => {
-    return rules.map((rule) => {
-        const ruleKey = rule.rule
-        if (!rule.error) rule.error = defaultError({
-            ruleKey,
-            field: field as string,
-            size: 3,
-            value: ruleKey === 'max' ? 2 : 4
-        })
+/**
+ * Prepares a rule for insertion.
+ * @param field - `data` field or property
+ * @param rule 
+ * @returns 
+ */
+const prepareRule = <T>(field: keyof T, rule: ValidatorRule) => {
+    const ruleKey = rule.rule
 
-        return rule
+    if (!rule.error) rule.error = defaultError({
+        ruleKey,
+        field: field as string,
+        size: 3,
+        value: ruleKey === 'max' ? 2 : 4
     })
+
+    return rule
 }
 
-export { LENGTH_KEYS, type ValidatorRuleList, type LengthKeyType, defaultError, transformRules }
+export { LENGTH_KEYS, type ValidatorRuleList, type LengthKeyType, prepareRule }
