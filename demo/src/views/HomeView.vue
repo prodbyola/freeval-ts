@@ -26,6 +26,9 @@
           </template>
         </AppInput>
         <AppButton @click="validate" label="Validate Now" />
+        <div v-if="successMsg" class="success_msg">
+          <p>{{ successMsg }}</p>
+        </div>
       </div>
     </div>
   </main>
@@ -36,6 +39,7 @@ import AppButton from '@/components/AppButton.vue'
 import AppIcon from '@/components/AppIcon.vue'
 
 import { useState } from '@/stores'
+import { ref } from 'vue'
 
 const appState = useState()
 
@@ -44,10 +48,13 @@ const validator = appState.validator
 
 type DataKey = keyof typeof data
 
+const successMsg = ref<string | undefined>(undefined)
 const validate = () => {
+  successMsg.value = undefined
+
   validator.validate()
-  if(validator.valid){
-    console.log('Validation successful!')
+  if (validator.valid) {
+    successMsg.value = 'Congratulations! Validation is successful.'
   }
 }
 
@@ -55,12 +62,23 @@ const showConfig = (field: DataKey) => {
   appState.currentField = field
   appState.showModal('config')
 }
-
 </script>
 <style lang="scss" scoped>
 .freeval__form {
   max-width: 400px;
   margin: auto;
   padding-top: 44px;
+
+  .success_msg {
+    background-color: green;
+    padding: 16px 12px;
+    margin-top: 14px;
+
+    p {
+      color: white;
+      font-weight: bold;
+      text-align: center;
+    }
+  }
 }
 </style>
