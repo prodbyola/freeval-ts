@@ -84,4 +84,4 @@ const prepareRule = <T>(field: keyof T, rule: ValidatorRule) => {
     return rule
 }
 
-export { LENGTH_KEYS, type ValidatorRuleList, type LengthKeyType, prepareRule }
+export { LENGTH_KEYS, type ValidatorRuleList, type LengthKeyType, prepareRule, defaultError }
