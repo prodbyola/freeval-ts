@@ -13,7 +13,7 @@
               <span class="bold_text">Error:</span> {{ rule.error }}
             </p>
           </div>
-          <AppIcon name="close" color="#000000ac" />
+          <AppIcon name="close" color="#000000ac" @click="() => removeRule(rule)" />
         </div>
       </div>
       <div class="config_column config_form">
@@ -53,7 +53,8 @@ const newRule = reactive<ValidatorRule>({
   rule: 'required'
 })
 
-const addRule = () => appState.addRule(newRule)
+const addRule = () => appState.addRule(JSON.parse(JSON.stringify(newRule)))
+const removeRule = (rule: ValidatorRule) => appState.removeRule(rule)
 
 const close = () => {
   appState.showModal(undefined)

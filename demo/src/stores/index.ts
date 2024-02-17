@@ -22,7 +22,25 @@ export const useState = defineStore('useState', () => {
   const showModal = (m: typeof modal.value) => modal.value = m
 
   const addRule = (rule: ValidatorRule) => {
-    dataRules[currentConfigField.value]?.push(rule)
+    const dr = dataRules[currentConfigField.value]
+    if (typeof dr !== 'undefined') {
+      dr.push(rule)
+    }
   }
-  return { modal, data, rules, validator, currentField: currentConfigField, showModal, addRule }
+
+  const removeRule = (rule: ValidatorRule) => {
+    const dr = dataRules[currentConfigField.value]
+
+    if (typeof dr !== 'undefined') {
+      dr.forEach(r => {
+        if(r.rule === rule.rule) {
+          const index = dr.indexOf(r)
+          dr.splice(index, 1)
+        }
+      })
+      
+    }
+  }
+
+  return { modal, data, rules, validator, currentField: currentConfigField, showModal, addRule, removeRule }
 })
