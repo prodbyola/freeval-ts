@@ -2,6 +2,8 @@
 
 Freeval (for free validator) provides a flexible validation mechanism for objects based on predefined rules. It's a typescript implementation of [freeval](https://github.com/prodbyola/freeval), a struct validation package in Rust.
 
+**[See Live Demo](https://freevalidator.netlify.app/)**
+
 ## Installation
 
 To install the freeval, you can use npm:
@@ -131,6 +133,9 @@ Retrieves validation rules defined for a data `field`. Returns `undefined` if no
 ## Contributing
 
 Contributions to the freeval package are welcome! Feel free to submit bug reports, feature requests, or pull requests through the GitHub repository.
+
+## Credits
+[Favicon Image by rawpixel.com](https://www.freepik.com/free-vector/locker_2900480.htm#query=lock&position=1&from_view=keyword&track=sph&uuid=7e2ec07b-814e-4eb6-8429-bcc8c15830c5") on Freepik
 
 ## License
 
