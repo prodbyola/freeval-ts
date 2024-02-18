@@ -13,13 +13,13 @@ export const useState = defineStore('useState', () => {
   const dataRules = reactive<ValidatorRules<typeof data>>({
     field1: [
       { 
-        rule: 'min', 
+        condition: 'min_len', 
         error: 'This field must have minimum of 8 characters!', 
         size: 8 
       }, 
-      { rule: 'required' }
+      { condition: 'required' }
     ],
-    field2: [{ rule: 'required' }]
+    field2: [{ condition: 'required' }]
   })
 
   const validator = reactive(new Validator(data, dataRules))

@@ -1,4 +1,4 @@
-import { LENGTH_KEYS, type LengthKeyType, type ValidatorRule, defaultError } from "../common"
+import { LENGTH_KEYS, type LengthConditionType, type ValidatorRule, defaultError } from "../common"
 
 const validateByLength = <T>(opt: {
     field: keyof T,
@@ -6,7 +6,7 @@ const validateByLength = <T>(opt: {
     rule: ValidatorRule,
 }): [boolean, string] => {
     const { field, value, rule } = opt
-    const condition = rule.condition as LengthKeyType
+    const condition = rule.condition as LengthConditionType
 
     if(!LENGTH_KEYS.includes(condition)){
         throw new Error('Invalid length type specified. Accepted input could be any of: '+LENGTH_KEYS)

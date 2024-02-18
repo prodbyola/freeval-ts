@@ -13,7 +13,7 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
-    "freeval": "^1.4.6",
+    "freeval": "^2.7.6",
     "pinia": "^2.1.7",
     "sass": "^1.70.0",
     "vue": "^3.4.15",

@@ -8,7 +8,7 @@
           <div class="rule_box" v-for="(rule, index) in appState.rules" :key="index">
             <div class="rule_box__content">
               <p>
-                <span class="bold_text">Rule:</span> {{ rule.rule
+                <span class="bold_text">Rule:</span> {{ rule.condition
                 }}{{ rule.size ? '=' + rule.size : '' }}
               </p>
               <p style="color: red" v-if="rule.error">
@@ -20,14 +20,14 @@
         </template>
       </div>
       <div class="config_column config_form">
-        <AppInput label="Rule" :options="rulekeys" v-model="newRule.rule" type="select" />
+        <AppInput label="Rule" :options="rulekeys" v-model="newRule.condition" type="select" />
         <AppInput
           label="Error"
           placeholder="Optionally Enter Validation Error"
           v-model="newRule.error"
         />
         <AppInput
-          v-if="lengthTypes.includes(newRule.rule as string)"
+          v-if="lengthTypes.includes(newRule.condition as string)"
           label="Rule Size"
           v-model="newRule.size"
           type="number"
@@ -49,11 +49,11 @@ import { type ValidatorRule } from 'freeval/common'
 
 const appState = useState()
 
-const lengthTypes = ['len', 'min', 'max']
+const lengthTypes = ['exact_len', 'min_len', 'max_len']
 const rulekeys = ['required', 'email', 'password', 'number', ...lengthTypes]
 
 const newRule = reactive<ValidatorRule>({
-  rule: 'required'
+  condition: 'required'
 })
 
 const addRule = () => appState.addRule(JSON.parse(JSON.stringify(newRule)))
