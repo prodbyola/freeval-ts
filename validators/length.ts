@@ -6,9 +6,9 @@ const validateByLength = <T>(opt: {
     rule: ValidatorRule,
 }): [boolean, string] => {
     const { field, value, rule } = opt
-    const ruleKey = rule.condition as LengthKeyType
+    const condition = rule.condition as LengthKeyType
 
-    if(!LENGTH_KEYS.includes(ruleKey)){
+    if(!LENGTH_KEYS.includes(condition)){
         throw new Error('Invalid length type specified. Accepted input could be any of: '+LENGTH_KEYS)
     }
 
@@ -17,7 +17,7 @@ const validateByLength = <T>(opt: {
     }
 
     const size = rule.size // size required by the rule
-    let condition = false
+    let validated = false
 
     if (typeof value === 'undefined'){
         throw new Error('Input value must be defined.')
@@ -26,24 +26,24 @@ const validateByLength = <T>(opt: {
     const vlen = value.toString().length // length of the input value
     const k = field as string
 
-    if(ruleKey ===  'len') {
-        condition = size === vlen
+    if(condition === 'exact_len') {
+        validated = size === vlen
         const gtl = vlen > size ? 'greater' : 'lesser'
 
-    } else if (ruleKey === 'min'){
-        condition = vlen >= size
-    } else if (ruleKey === 'max'){
-        condition = vlen <= size
+    } else if (condition === 'min_len'){
+        validated = vlen >= size
+    } else if (condition === 'max_len'){
+        validated = vlen <= size
     }
 
     let error = rule.error ?? defaultError({
-        ruleKey,
+        condition,
         field: k,
         size,
         value: vlen
     })
 
-    return [condition, error]
+    return [validated, error]
 
 }
 
