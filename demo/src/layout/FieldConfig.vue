@@ -8,7 +8,7 @@
           <div class="rule_box" v-for="(rule, index) in appState.rules" :key="index">
             <div class="rule_box__content">
               <p>
-                <span class="bold_text">Rule:</span> {{ rule.condition
+                <span class="bold_text">Condition:</span> {{ rule.condition
                 }}{{ rule.size ? '=' + rule.size : '' }}
               </p>
               <p style="color: red" v-if="rule.error">
@@ -73,8 +73,10 @@ const close = () => {
   min-height: 100vh;
   min-width: 100vw;
   width: 100%;
+  height: 100%;
   z-index: 99;
   background-color: #0000002a;
+  overflow-y: scroll;
 
   .app_modal__content {
     padding: 2rem;
