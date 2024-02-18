@@ -198,7 +198,7 @@ export class Validator<T> {
     private ruleExists(field: keyof T, rule: ValidatorRule){
         const fr = this.getFieldRules(field)
         if(fr){
-            return fr.find((r) => r.rule === rule.rule)
+            return fr.find((r) => r.condition === rule.condition)
         }
     }
 

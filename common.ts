@@ -6,7 +6,10 @@ type LengthKeyType = typeof LENGTH_KEYS[number]
 type ValidatorKey = 'required' | 'email' | 'password' | 'number' | LengthKeyType | boolean
 
 export type ValidatorRule = {
-    rule: ValidatorKey
+    /**
+     * rule condition that must be met.
+     */
+    condition: ValidatorKey
     error?: string
     /**
      * This property is required if `rule` === `LengthKeyType`. For example, if rule is `max`
@@ -72,7 +75,7 @@ const defaultError = (opt: {
  * @returns 
  */
 const prepareRule = <T>(field: keyof T, rule: ValidatorRule) => {
-    const ruleKey = rule.rule
+    const ruleKey = rule.condition
 
     if (!rule.error) rule.error = defaultError({
         ruleKey,

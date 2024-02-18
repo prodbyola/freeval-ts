@@ -29,13 +29,15 @@ interface UserData {
     username: string;
     email: string;
     password: string;
+    confirmPassword: string
 }
 
 // Define your data object and validation rules
 const data: UserData = {
     username: 'prodbyola',
     email: 'prodbyola@example.com',
-    password: 'securePassword123'
+    password: 'securePassword123',
+    confirmPassword: ''
 };
 
 const rules: ValidatorRules<UserData /* or typeof `data` */> = {
@@ -56,6 +58,13 @@ const rules: ValidatorRules<UserData /* or typeof `data` */> = {
     password: [
         { rule: 'required', error: 'Password is required' },
         { rule: 'password', error: 'Weak password' }
+    ]
+    confirmPassword: [
+        // You can also define your custom boolean condition
+        { 
+            rule: data.password === data.confirmPassword,
+            error: 'Please confirm your password.'
+        }
     ]
 };
 
@@ -133,9 +142,6 @@ Retrieves validation rules defined for a data `field`. Returns `undefined` if no
 ## Contributing
 
 Contributions to the freeval package are welcome! Feel free to submit bug reports, feature requests, or pull requests through the GitHub repository.
-
-## Credits
-[Favicon Image by rawpixel.com](https://www.freepik.com/free-vector/locker_2900480.htm#query=lock&position=1&from_view=keyword&track=sph&uuid=7e2ec07b-814e-4eb6-8429-bcc8c15830c5") on Freepik
 
 ## License
 

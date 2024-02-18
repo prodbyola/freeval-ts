@@ -2,7 +2,7 @@ import { LENGTH_KEYS, type LengthKeyType, type ValidatorRule, defaultError } fro
 import { validateByLength } from "./length";
 
 const validateRule = <T>(rule: ValidatorRule, field: keyof T, value: string): [boolean, string] => {
-    let ruleKey = rule.rule
+    let ruleKey = rule.condition
     let validated = false
 
     const v = value

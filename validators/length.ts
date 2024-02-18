@@ -6,7 +6,7 @@ const validateByLength = <T>(opt: {
     rule: ValidatorRule,
 }): [boolean, string] => {
     const { field, value, rule } = opt
-    const ruleKey = rule.rule as LengthKeyType
+    const ruleKey = rule.condition as LengthKeyType
 
     if(!LENGTH_KEYS.includes(ruleKey)){
         throw new Error('Invalid length type specified. Accepted input could be any of: '+LENGTH_KEYS)
