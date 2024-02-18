@@ -1,6 +1,6 @@
 {
   "name": "freeval",
-  "version": "2.7.6",
+  "version": "2.8.1",
   "description": "Freeval (for free validator) provides a flexible validation mechanism for objects based on predefined rules.",
   "categories": [
     "Keymaps",
@@ -8,7 +8,7 @@
   ],
   "main": "dist/index.js",
   "scripts": {
-    "dev": "cd demo && yarn dev",
+    "dev": "cd demo && bun dev",
     "build": "rm -rf dist && tsc",
     "test": "jest"
   },

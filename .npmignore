@@ -1,3 +1,5 @@
-demo/
 bun.lockb
 yarn.lock
+demo/
+tests/
+dist/tests

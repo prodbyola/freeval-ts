@@ -12,11 +12,11 @@ export const useState = defineStore('useState', () => {
 
   const dataRules = reactive<ValidatorRules<typeof data>>({
     field1: [
-      { 
-        condition: 'min_len', 
-        error: 'This field must have minimum of 8 characters!', 
-        size: 8 
-      }, 
+      {
+        condition: 'min_len',
+        error: 'This field must have minimum of 8 characters!',
+        size: 8
+      },
       { condition: 'required' }
     ],
     field2: [{ condition: 'required' }]
@@ -25,7 +25,10 @@ export const useState = defineStore('useState', () => {
   const validator = reactive(new Validator(data, dataRules))
   const currentConfigField = ref<keyof typeof data>('field1')
 
-  const rules = computed(() => validator.getFieldRules(currentConfigField.value))
+  const rules = computed(() => {
+    console.log(validator.getFieldRules(currentConfigField.value))
+    return validator.getFieldRules(currentConfigField.value)
+  })
   const showModal = (m: typeof modal.value) => modal.value = m
 
   const addRule = (rule: ValidatorRule) => {
@@ -36,5 +39,14 @@ export const useState = defineStore('useState', () => {
     validator.removeFieldRule(currentConfigField.value, rule)
   }
 
-  return { modal, data, rules, validator, currentField: currentConfigField, showModal, addRule, removeRule }
+  return { 
+    modal, 
+    data, 
+    rules, 
+    validator, 
+    currentConfigField, 
+    showModal, 
+    addRule, 
+    removeRule 
+  }
 })

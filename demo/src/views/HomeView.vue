@@ -61,7 +61,7 @@ const validate = () => {
 }
 
 const showConfig = (field: DataKey) => {
-  appState.currentField = field
+  appState.currentConfigField = field
   appState.showModal('config')
 }
 </script>

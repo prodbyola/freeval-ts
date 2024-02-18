@@ -38,9 +38,9 @@ const defaultError = (opt: {
     size?: number, 
     value?: number 
 }) => {
-    const { condition: ruleKey, field, size, value } = opt
+    const { condition, field, size, value } = opt
 
-    switch (ruleKey) {
+    switch (condition) {
         case 'required':
             return `${field} field is required.`
 

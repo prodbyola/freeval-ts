@@ -1,7 +1,7 @@
 <template>
   <div class="app_modal">
     <div class="app_modal__content">
-      <h3 class="page__header">Validation Settings for {{ appState.currentField }}</h3>
+      <h3 class="page__header">Validation Settings for {{ appState.currentConfigField }}</h3>
       <div class="config_column rules_column">
         <template v-if="appState.rules && appState.rules.length">
 
@@ -45,12 +45,12 @@ import AppButton from '@/components/AppButton.vue'
 
 import { useState } from '@/stores'
 import { reactive } from 'vue'
-import { type ValidatorRule } from 'freeval/common'
+import { type ValidatorRule, type LengthConditionType, LENGTH_KEYS } from 'freeval/common'
 
 const appState = useState()
 
 const lengthTypes = ['exact_len', 'min_len', 'max_len']
-const rulekeys = ['required', 'email', 'password', 'number', ...lengthTypes]
+const rulekeys = ['required', 'email', 'password', 'number', ...LENGTH_KEYS ] as LengthConditionType[]
 
 const newRule = reactive<ValidatorRule>({
   condition: 'required'
