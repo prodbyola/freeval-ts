@@ -52,7 +52,7 @@ export class Validator<T> {
      }
 
     /**
-     * Sets the validation rules for the object properties.
+     * Sets the validation rules for the `data` properties.
      * @param rules - The validation rules
      */
     setRules(rules: ValidatorRules<T>) {

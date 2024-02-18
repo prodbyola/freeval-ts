@@ -43,9 +43,9 @@ const data: UserData = {
 const rules: ValidatorRules<UserData /* or typeof `data` */> = {
     username: [
         { condition: 'required', error: 'Username is required' },
-        // minimum of 8 characters
+        // minimum of 8 characters length
         { 
-            condition: 'min', 
+            condition: 'min_len', 
             error: 'Username must be 8 characters minimum', 
             size: 8 
         }, 
@@ -123,21 +123,29 @@ Validates all properties or fields in `data` based on speified rules.
 
 Sets the validation rules for the object properties.
 
-#### `getErrors(key: keyof T): string[] | undefined`
+#### `getErrors(field: keyof T): string[] | undefined`
 
-Gets the validation errors for a specific object property.
+Gets the validation errors for a specific `data` field or property.
 
-#### `clearFieldErrors(key: keyof T): void`
+#### `clearFieldErrors(field: keyof T): void`
 
-Clears the validation errors for a specific object property.
+Clears the validation errors for a specific `data` field or property.
 
 #### `clearAllErrors(): void`
 
 Clears all validation errors.
 
-#### `getFieldRules(key: keyof T): ValidatorRule[] | undefined`
+#### `getFieldRules(field: keyof T): ValidatorRule[] | undefined`
 
 Retrieves validation rules defined for a data `field`. Returns `undefined` if no rule is declared for `field`.
+
+#### `removeFieldRules(field: keyof T): void`
+
+Remove all rules added for a field or property.
+
+#### `removeFieldRule(field: keyof T, rule: ValidatorRule): void`
+
+Remove a specific rule added to a field or property.
 
 ## Contributing
 
