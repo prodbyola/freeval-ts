@@ -20,7 +20,7 @@
         </template>
       </div>
       <div class="config_column config_form">
-        <AppInput label="Rule" :options="rulekeys" v-model="newRule.condition" type="select" />
+        <AppInput label="Condition" :options="rulekeys" v-model="newRule.condition" type="select" />
         <AppInput
           label="Error"
           placeholder="Optionally Enter Validation Error"
