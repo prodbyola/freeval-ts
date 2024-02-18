@@ -42,27 +42,27 @@ const data: UserData = {
 
 const rules: ValidatorRules<UserData /* or typeof `data` */> = {
     username: [
-        { rule: 'required', error: 'Username is required' },
+        { condition: 'required', error: 'Username is required' },
         // minimum of 8 characters
         { 
-            rule: 'min', 
+            condition: 'min', 
             error: 'Username must be 8 characters minimum', 
             size: 8 
         }, 
     ],
     email: [
         // Setting an error message is OPTIONAL.
-        { rule: 'required' },
-        { rule: 'email', error: 'Invalid email format' }
+        { condition: 'required' },
+        { condition: 'email', error: 'Invalid email format' }
     ],
     password: [
-        { rule: 'required', error: 'Password is required' },
-        { rule: 'password', error: 'Weak password' }
+        { condition: 'required', error: 'Password is required' },
+        { condition: 'password', error: 'Weak password' }
     ]
     confirmPassword: [
         // You can also define your custom boolean condition
         { 
-            rule: data.password === data.confirmPassword,
+            condition: data.password === data.confirmPassword,
             error: 'Please confirm your password.'
         }
     ]
