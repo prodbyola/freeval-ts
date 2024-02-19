@@ -9,7 +9,7 @@ const data = {
 const dataRules: ValidatorRules<typeof data> = {
     field1: [
         {
-            condition: 'min_len',
+            condition: 'min',
             error: 'This field must have minimum of 8 characters!',
             size: 8
         },

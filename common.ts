@@ -1,4 +1,4 @@
-const LENGTH_CONDITIONS = ['exact_len', 'min_len', 'max_len'] as const
+const LENGTH_CONDITIONS = ['len', 'min', 'max'] as const
 type LengthConditionType = typeof LENGTH_CONDITIONS[number]
 
 type RuleCondition = 'required' | 'email' | 'password' | 'number' | LengthConditionType | boolean
@@ -53,17 +53,17 @@ const defaultError = (opt: {
         case 'number':
             return `${field} field must contain digits only. Please remove letters or whitespaces..`
 
-        case 'exact_len':
+        case 'len':
             const s = size ?? 0
             const v = value ?? 0
 
             const gtl = v > s ? 'greater' : 'lesser'
             return `The length of ${field} input is ${gtl} than the required length of ${s}.`
 
-        case 'min_len':
+        case 'min':
             return `The required minimum length for ${field} is ${size}. You entered ${value} characters.`
 
-        case 'max_len':
+        case 'max':
             return `The required maximum length for ${field} is ${size}. You entered ${value} characters.`
 
         default:
@@ -84,7 +84,7 @@ const prepareRule = <T>(field: keyof T, rule: ValidatorRule) => {
         condition: condition,
         field: field as string,
         size: 3,
-        value: condition === 'max_len' ? 2 : 4
+        value: condition === 'max' ? 2 : 4
     })
 
     return rule

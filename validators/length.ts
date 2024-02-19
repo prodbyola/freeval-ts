@@ -26,13 +26,13 @@ const validateByLength = <T>(opt: {
     const vlen = value.toString().length // length of the input value
     const k = field as string
 
-    if(condition === 'exact_len') {
+    if(condition === 'len') {
         validated = size === vlen
         const gtl = vlen > size ? 'greater' : 'lesser'
 
-    } else if (condition === 'min_len'){
+    } else if (condition === 'min'){
         validated = vlen >= size
-    } else if (condition === 'max_len'){
+    } else if (condition === 'max'){
         validated = vlen <= size
     }
 

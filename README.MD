@@ -2,7 +2,8 @@
 
 Freeval (for free validator) provides a flexible validation mechanism for objects based on predefined rules. It's a typescript implementation of [freeval](https://github.com/prodbyola/freeval), a struct validation crate in Rust.
 
-**[See Live Demo](https://freevalidator.netlify.app/)**
+- **[See Live Demo](https://freevalidator.netlify.app/)**
+- **[See Video Demo](https://youtu.be/hv2zrdnYy2M)**
 
 ## Installation
 

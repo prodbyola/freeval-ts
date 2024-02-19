@@ -27,7 +27,7 @@
           v-model="newRule.error"
         />
         <AppInput
-          v-if="lengthTypes.includes(newRule.condition as string)"
+          v-if="LENGTH_KEYS.includes(newRule.condition as LengthConditionType)"
           label="Rule Size"
           v-model="newRule.size"
           type="number"
@@ -49,7 +49,6 @@ import { type ValidatorRule, type LengthConditionType, LENGTH_KEYS } from 'freev
 
 const appState = useState()
 
-const lengthTypes = ['exact_len', 'min_len', 'max_len']
 const rulekeys = ['required', 'email', 'password', 'number', ...LENGTH_KEYS ] as LengthConditionType[]
 
 const newRule = reactive<ValidatorRule>({
