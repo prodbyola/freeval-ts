@@ -1,7 +1,10 @@
 const LENGTH_CONDITIONS = ['len', 'min', 'max'] as const
 type LengthConditionType = typeof LENGTH_CONDITIONS[number]
 
-type RuleCondition = 'required' | 'email' | 'password' | 'number' | LengthConditionType | boolean
+const COMPARE_CONDITIONS = ['equal', 'greater', 'less', 'greaterOrEqual', 'lessOrEqual'] as const
+type CompareConditionType = typeof COMPARE_CONDITIONS[number]
+
+type RuleCondition = 'required' | 'email' | 'password' | 'number' | LengthConditionType | CompareConditionType | boolean
 
 export type ValidatorRule = {
     /**
@@ -13,7 +16,7 @@ export type ValidatorRule = {
      * Error to be shown if validation fails.
      */
     error?: string
-    
+
     /**
      * This property is required if `rule` === `LengthKeyType`. For example, if rule is `max`
      * or `len`, then we must specify the size we expect the input value tp conform to. If we 
@@ -32,11 +35,11 @@ type ValidatorRuleList = Array<ValidatorRule>
  * @param opt 
  * @returns 
  */
-const defaultError = (opt: { 
-    condition: RuleCondition, 
-    field: string, 
-    size?: number, 
-    value?: number 
+const defaultError = (opt: {
+    condition: RuleCondition,
+    field: string,
+    size?: number,
+    value?: number
 }) => {
     const { condition, field, size, value } = opt
 
@@ -90,4 +93,12 @@ const prepareRule = <T>(field: keyof T, rule: ValidatorRule) => {
     return rule
 }
 
-export { LENGTH_CONDITIONS as LENGTH_KEYS, type ValidatorRuleList, type LengthConditionType, prepareRule, defaultError }
+export {
+    LENGTH_CONDITIONS,
+    COMPARE_CONDITIONS,
+    type CompareConditionType,
+    type LengthConditionType, 
+    type ValidatorRuleList,
+    prepareRule, 
+    defaultError
+}

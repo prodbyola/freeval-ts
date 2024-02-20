@@ -1,4 +1,4 @@
-import { LENGTH_KEYS, type LengthConditionType, type ValidatorRule, defaultError } from "../common";
+import { LENGTH_CONDITIONS, type LengthConditionType, type ValidatorRule, defaultError } from "../common";
 import { validateByLength } from "./length";
 
 const validateRule = <T>(rule: ValidatorRule, field: keyof T, value: string): [boolean, string] => {
@@ -20,7 +20,7 @@ const validateRule = <T>(rule: ValidatorRule, field: keyof T, value: string): [b
     } else if (condition === 'number') {
         validated = new RegExp(/^\d+$/).test(v)
 
-    } else if (LENGTH_KEYS.includes(condition as LengthConditionType)) {
+    } else if (LENGTH_CONDITIONS.includes(condition as LengthConditionType)) {
         return validateByLength({
             field: field,
             value,

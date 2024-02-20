@@ -1,4 +1,4 @@
-import { LENGTH_KEYS, type LengthConditionType, type ValidatorRule, defaultError } from "../common"
+import { LENGTH_CONDITIONS, type LengthConditionType, type ValidatorRule, defaultError } from "../common"
 
 const validateByLength = <T>(opt: {
     field: keyof T,
@@ -8,8 +8,8 @@ const validateByLength = <T>(opt: {
     const { field, value, rule } = opt
     const condition = rule.condition as LengthConditionType
 
-    if(!LENGTH_KEYS.includes(condition)){
-        throw new Error('Invalid length type specified. Accepted input could be any of: '+LENGTH_KEYS)
+    if(!LENGTH_CONDITIONS.includes(condition)){
+        throw new Error('Invalid length type specified. Accepted input could be any of: '+LENGTH_CONDITIONS)
     }
 
     if(typeof rule.size === 'undefined'){
@@ -28,7 +28,6 @@ const validateByLength = <T>(opt: {
 
     if(condition === 'len') {
         validated = size === vlen
-        const gtl = vlen > size ? 'greater' : 'lesser'
 
     } else if (condition === 'min'){
         validated = vlen >= size
