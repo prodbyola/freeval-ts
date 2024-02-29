@@ -1,6 +1,6 @@
 {
   "name": "freeval",
-  "version": "2.18.11",
+  "version": "2.18.13",
   "description": "Freeval (for free validator) provides a flexible validation mechanism for objects based on predefined rules.",
   "categories": [
     "Keymaps",
@@ -15,9 +15,7 @@
   "author": "prodbyola@gmail.com",
   "license": "GPL-3.0-only",
   "devDependencies": {
-    "typescript": "^5.3.3"
-  },
-  "dependencies": {
+    "typescript": "^5.3.3",
     "@types/jest": "^29.5.12",
     "jest": "^29.7.0",
     "ts-jest": "^29.1.2"
