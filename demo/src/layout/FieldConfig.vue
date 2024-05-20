@@ -71,13 +71,12 @@ const close = () => {
   top: 0;
   min-height: 100vh;
   min-width: 100vw;
-  width: 100%;
-  height: 100%;
   z-index: 99;
-  background-color: #0000002a;
   overflow-y: scroll;
-
+  
   .app_modal__content {
+    max-width: 1024px;
+    margin: 0 auto;
     padding: 2rem;
     min-height: 100vh;
     width: 100%;

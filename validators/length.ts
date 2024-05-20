@@ -7,42 +7,51 @@ const validateByLength = <T>(opt: {
 }): [boolean, string] => {
     const { field, value, rule } = opt
     const condition = rule.condition as LengthConditionType
+    let error: string | undefined = undefined 
 
     if(!LENGTH_CONDITIONS.includes(condition)){
-        throw new Error('Invalid length type specified. Accepted input could be any of: '+LENGTH_CONDITIONS)
+        error = 'Invalid length type specified. Accepted input could be any of: '+LENGTH_CONDITIONS
     }
 
     if(typeof rule.size === 'undefined'){
-        throw new Error('This validation rule requires you to specify a size.')
+        error = 'This validation rule requires you to specify a size.'
     }
 
     const size = rule.size // size required by the rule
     let validated = false
 
     if (typeof value === 'undefined'){
-        throw new Error('Input value must be defined.')
+        error = 'Input value must be defined.'
     }
 
-    const vlen = value.toString().length // length of the input value
-    const k = field as string
-
-    if(condition === 'len') {
-        validated = size === vlen
-
-    } else if (condition === 'min'){
-        validated = vlen >= size
-    } else if (condition === 'max'){
-        validated = vlen <= size
+    if(error !== undefined) {
+        return [validated, error]
     }
 
-    let error = rule.error ?? defaultError({
-        condition,
-        field: k,
-        size,
-        value: vlen
-    })
+    if(value && size) {
+        const vlen = value.toString().length // length of the input value
+        const k = field as string
+    
+        if(condition === 'len') {
+            validated = size === vlen
+    
+        } else if (condition === 'min'){
+            validated = vlen >= size
+        } else if (condition === 'max'){
+            validated = vlen <= size
+        }
+    
+        error = rule.error ?? defaultError({
+            condition,
+            field: k,
+            size,
+            value: vlen
+        })
+    
+        return [validated, error]
+    }
 
-    return [validated, error]
+    return [false, 'Unknown error']
 
 }
 
