@@ -26,6 +26,8 @@ const validateRule = <T>(rule: ValidatorRule, field: keyof T, value: string): [b
             value,
             rule,
         })
+    } else if (typeof condition === 'boolean') {
+        validated = condition
     }
 
     let error = rule.error ?? defaultError({
