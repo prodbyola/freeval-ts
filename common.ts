@@ -1,7 +1,7 @@
 const LENGTH_CONDITIONS = ['len', 'min', 'max'] as const
 type LengthConditionType = typeof LENGTH_CONDITIONS[number]
 
-const COMPARE_CONDITIONS = ['equal', 'greater', 'less', 'greaterOrEqual', 'lessOrEqual'] as const
+const COMPARE_CONDITIONS = ['eq', 'gt', 'lt', 'gte', 'lte'] as const
 type CompareConditionType = typeof COMPARE_CONDITIONS[number]
 
 type RuleCondition = 'required' | 'email' | 'password' | 'number' | LengthConditionType | CompareConditionType | boolean

@@ -1,11 +1,11 @@
 import { LENGTH_CONDITIONS, type LengthConditionType, type ValidatorRule, defaultError } from "../common";
 import { validateByLength } from "./length";
 
-const validateRule = <T>(rule: ValidatorRule, field: keyof T, value: string): [boolean, string] => {
+const validateRule = <T>(rule: ValidatorRule, field: keyof T, value: unknown, fieldData?: unknown): [boolean, string] => {
     let condition = rule.condition
     let validated = false
 
-    const v = value
+    const v = value as string
 
     if (condition === 'required') {
         validated = Boolean(v || v?.length) // value must not be empty
@@ -23,11 +23,11 @@ const validateRule = <T>(rule: ValidatorRule, field: keyof T, value: string): [b
     } else if (LENGTH_CONDITIONS.includes(condition as LengthConditionType)) {
         return validateByLength({
             field: field,
-            value,
+            value: value as string,
             rule,
         })
-    } else if (typeof condition === 'boolean') {
-        validated = condition
+    } else if (condition === 'eq') {
+        validated = value === fieldData
     }
 
     let error = rule.error ?? defaultError({

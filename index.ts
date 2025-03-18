@@ -128,11 +128,13 @@ export class Validator<T> {
         }
 
         const ruleList = this.rules[field]
+        const fieldData = this.data[field]
+
         if (ruleList && ruleList.length) {
             const value = this.data[field]
 
             ruleList.forEach(rule => {
-                const [isValid, error] = validateRule(rule, field, value as unknown as string)
+                const [isValid, error] = validateRule(rule, field, value, fieldData)
 
                 if (!isValid) {
                     this.setFieldError(field, error)
