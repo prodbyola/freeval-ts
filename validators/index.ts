@@ -1,7 +1,7 @@
-import { LENGTH_CONDITIONS, type LengthConditionType, type ValidatorRule, defaultError } from "../common";
+import { LENGTH_CONDITIONS, type LengthConditionType, RegexExpect, type ValidatorRule, defaultError } from "../common";
 import { validateByLength } from "./length";
 
-const validateRule = <T>(rule: ValidatorRule, field: keyof T, value: unknown, fieldData?: unknown): [boolean, string] => {
+const validateRule = <T>(rule: ValidatorRule, field: keyof T, value: unknown): [boolean, string] => {
     let condition = rule.condition
     let validated = false
 
@@ -36,6 +36,10 @@ const validateRule = <T>(rule: ValidatorRule, field: keyof T, value: unknown, fi
         }
 
         validated = value === rule.expect
+        console.log('eq', value, rule.expect, validated)
+    } else if (condition === 'regex') {
+        const expect = rule.expect as RegexExpect
+        validated = expect.regex.test(expect.test)
     }
 
     return [validated, error]
