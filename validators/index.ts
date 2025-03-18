@@ -30,7 +30,7 @@ const validateRule = <T>(rule: ValidatorRule, field: keyof T, value: unknown): [
             value: value as string,
             rule,
         })
-    } else if (condition === 'eq') {
+    } else if (condition === 'match') {
         if(typeof rule.expect === 'undefined'){
             error = 'This validation rule requires you to specify a size.'
         }

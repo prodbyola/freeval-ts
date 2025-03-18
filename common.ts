@@ -4,7 +4,7 @@ type LengthConditionType = typeof LENGTH_CONDITIONS[number]
 const COMPARE_CONDITIONS = ['eq', 'gt', 'lt', 'gte', 'lte'] as const
 type CompareConditionType = typeof COMPARE_CONDITIONS[number]
 
-type RuleCondition = 'required' | 'email' | 'password' | 'number' | 'regex' | LengthConditionType | CompareConditionType | boolean
+type RuleCondition = 'required' | 'email' | 'password' | 'number' | 'regex' | 'match' | LengthConditionType | CompareConditionType | boolean
 export type RegexExpect = {
     regex: RegExp,
     test: string
