@@ -5,6 +5,10 @@ const validateRule = <T>(rule: ValidatorRule, field: keyof T, value: unknown, fi
     let condition = rule.condition
     let validated = false
 
+    let error = rule.error ?? defaultError({
+        condition: condition,
+        field: field as string
+    })
     const v = value as string
 
     if (condition === 'required') {
@@ -27,13 +31,12 @@ const validateRule = <T>(rule: ValidatorRule, field: keyof T, value: unknown, fi
             rule,
         })
     } else if (condition === 'eq') {
-        validated = value === fieldData
-    }
+        if(typeof rule.expect === 'undefined'){
+            error = 'This validation rule requires you to specify a size.'
+        }
 
-    let error = rule.error ?? defaultError({
-        condition: condition,
-        field: field as string
-    })
+        validated = value === rule.expect
+    }
 
     return [validated, error]
 }

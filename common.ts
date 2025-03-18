@@ -18,14 +18,14 @@ export type ValidatorRule = {
     error?: string
 
     /**
-     * This property is required if `rule` === `LengthKeyType`. For example, if rule is `max`
-     * or `len`, then we must specify the size we expect the input value tp conform to. If we 
-     * do not supply this value when we `rule` === `LengthKeyType`, then an error will be thrown.
+     * The value we expect the field `value` to match. Should be set where applicable For example, if rule is `max`
+     * or `len`, then we must specify the size we expect the input value of the respective field to conform to. If we 
+     * do not supply this value when required, then an error will be thrown.
      * ```typescript
      *  max=6
      * ```
      */
-    size?: number
+    expect?: number | string
 }
 
 type ValidatorRuleList = Array<ValidatorRule>

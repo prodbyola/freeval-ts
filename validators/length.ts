@@ -13,11 +13,11 @@ const validateByLength = <T>(opt: {
         error = 'Invalid length type specified. Accepted input could be any of: '+LENGTH_CONDITIONS
     }
 
-    if(typeof rule.size === 'undefined'){
+    if(typeof rule.expect === 'undefined'){
         error = 'This validation rule requires you to specify a size.'
     }
 
-    const size = rule.size // size required by the rule
+    const size = rule.expect as number// size required by the rule
     let validated = false
 
     if (typeof value === 'undefined'){

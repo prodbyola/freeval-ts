@@ -12,7 +12,7 @@ const compare = <T>(opt: {
         throw new Error('Invalid condition type specified. Accepted condition could be any of: '+COMPARE_CONDITIONS)
     }
 
-    if(typeof rule.size === 'undefined'){
+    if(typeof rule.expect === 'undefined'){
         throw new Error('This validation rule requires you to specify a size.')
     }
 }
