@@ -36,7 +36,7 @@ const validateRule = <T>(rule: ValidatorRule, field: keyof T, value: unknown): [
         }
 
         validated = value === rule.expect
-        console.log('eq', 'v: ' + value, 'e: ' + rule.expect, validated)
+        console.log('eq', 'v: ' + value, 'e: ' + rule.expect, typeof rule.expect, validated)
     } else if (condition === 'regex') {
         const expect = rule.expect as RegexExpect
         validated = expect.regex.test(expect.test)
