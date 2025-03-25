@@ -18,7 +18,7 @@ const validateRule = <T>(rule: ValidatorRule, field: keyof T, value: unknown): [
         validated = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(v) // value must be an email patterb
     
     } else if (condition === 'password') {
-        const strongRegex = new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})');
+        const strongRegex = new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*\-])(?=.{8,})');
         validated = strongRegex.test(v)
     
     } else if (condition === 'number') {
